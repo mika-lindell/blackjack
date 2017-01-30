@@ -1,9 +1,10 @@
 class Card {
 
-  constructor(suit = null, index = null, svg = null){
-    this.suit = suit;
-    this.index = index;
-    this.svg = svg;
+  constructor(args = {}){
+    this.suit = args.suit || null;
+    this.card = args.card || null;
+    this.numeric = args.numeric || null;
+    this.svg = args.svg || null;
   }
 
 }

@@ -9,7 +9,7 @@ class Deck {
 
   generate(){
 
-    const cards = Array.apply(null, Array(52));
+    const cards = Array(52).fill();
 
     const suits = [
       "hearts", 
@@ -34,9 +34,13 @@ class Deck {
         const card = named[cardIndex] || cardIndex;
 
         return new Card(
-          suit, 
-          card, 
-          `${card}_of_${suit}`);
+          {
+            suit:     suit,
+            card:     card, 
+            numeric:  cardIndex, 
+            svg:      `${card}_of_${suit}`
+          }
+        );
       }
 
     );

@@ -12,7 +12,7 @@ class CardComponent extends React.Component {
   render() {
     return (
       <img 
-        src={`/public/deck/${this.props.svg}.svg`} 
+        src={`/public/deck/${this.props.card.svg}.svg`} 
         alt={this.props.svg} 
         />
     );
