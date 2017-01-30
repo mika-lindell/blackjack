@@ -1,8 +1,10 @@
 import React from 'react';
 
-import './awesome.component.scss';
+import './card.component.scss';
 
-class AwesomeComponent extends React.Component {
+
+// Can we use functional component? */
+class CardComponent extends React.Component {
 
   constructor(props) {
     super(props);
@@ -18,12 +20,13 @@ class AwesomeComponent extends React.Component {
   render() {
     return (
       <div>
-        Likes : <span>{this.state.likesCount}</span>
-        <div><button onClick={this.onLike}>Like Me</button></div>
+        Suit: {this.props.suit}
+        <br/>
+        Index: {this.props.index}
       </div>
     );
   }
 
 }
 
-export default AwesomeComponent;
+export default CardComponent;
