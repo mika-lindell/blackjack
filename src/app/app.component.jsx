@@ -1,8 +1,10 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import Card from '../card/card.type.jsx';
 import CardComponent from '../card/card.component.jsx';
+
+import Deck from '../deck/deck.jsx';
+import Card from '../card/card.jsx';
 
 
 import './app.component.scss';
@@ -12,12 +14,16 @@ class AppComponent extends React.Component {
   constructor(){
     super();
     this.state = {
-      deck: null,
+      deck: new Deck(),
       hands: {
         player: null,
         dealer: null,
       }
     }
+
+    this.state.deck.generate();
+    console.log(this.state.deck);
+
   }
 
   renderCard(card){
