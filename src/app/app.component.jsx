@@ -1,11 +1,10 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import CardComponent from '../card/card.component.jsx';
+import HandComponent from '../hand/hand.component.jsx';
 
 import Deck from '../deck/deck.jsx';
-import Card from '../card/card.jsx';
-
+import Hand from '../hand/hand.jsx';
 
 import './app.component.scss';
 
@@ -16,26 +15,34 @@ class AppComponent extends React.Component {
     this.state = {
       deck: new Deck(),
       hands: {
-        player: null,
-        dealer: null,
+        player: new Hand(),
+        dealer: new Hand(),
       }
     }
+
   }
 
-  renderCard(card){
-    return(
-        <CardComponent suit={card.suit} index={card.index} />
-      );
+  drawFrom(deck, toHand){
+    toHand.hit(deck.draw());
+  }
+
+  renderHand(hand){
+    return (
+      <HandComponent hand={hand} />
+    );
   }
 
   render() {
 
     this.state.deck.collectAndShuffle();
 
-    const card = this.state.deck.draw();
+    this.drawFrom(this.state.deck, this.state.hands.player);
+    this.drawFrom(this.state.deck, this.state.hands.player);
+    this.drawFrom(this.state.deck, this.state.hands.player);
+
     return (
       <div>
-        {this.renderCard(card)}      
+        {this.renderHand(this.state.hands.player)}
       </div>
     );
   }
