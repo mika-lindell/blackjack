@@ -4,19 +4,39 @@ import Card from '../card/card.jsx';
 class Deck {
 
   constructor(){
-    this.suits = ["hearts", "diamonds", "clubs", "spades"];
     this.cards = null;
   }
 
   generate(){
 
-    let cards = Array.apply(null, Array(52));
+    const cards = Array.apply(null, Array(52));
+
+    const suits = [
+      "hearts", 
+      "diamonds", 
+      "clubs", 
+      "spades"
+    ];
+
+    const named = {
+      13: 'king',
+      12: 'queen',
+      11: 'jack'
+    };
 
     this.cards = cards.map(
       (currentValue, index, array) => {
-        const suit = Math.floor((index) / array.length * this.suits.length); 
-        const cardIndex = index % ( array.length /  this.suits.length); 
-        return new Card(suit, cardIndex);
+
+        const suitIndex = Math.floor( index / array.length * suits.length ); 
+        const cardIndex = (index % ( array.length / suits.length )) + 1;
+
+        const suit = (suits[suitIndex] || suitIndex);
+        const card = named[cardIndex] || cardIndex;
+
+        return new Card(
+          suit, 
+          card, 
+          `${card}_of_${suit}`);
       }
 
     );

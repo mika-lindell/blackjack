@@ -16,6 +16,8 @@ class AppComponent extends React.Component {
       dealer: new Array(),
     }
 
+    this.state.deck.collectAndShuffle();
+
   }
 
   hit(){
@@ -28,8 +30,6 @@ class AppComponent extends React.Component {
   }
 
   render() {
-
-    this.state.deck.collectAndShuffle();
 
     return (
       <div>
