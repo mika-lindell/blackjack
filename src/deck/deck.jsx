@@ -42,11 +42,12 @@ class Deck {
   }
 
   draw(){
-
+    return this.cards.shift();
   }
 
-  reset(){
-
+  collectAndShuffle(){
+    this.generate();
+    this.shuffle();
   }
 
 

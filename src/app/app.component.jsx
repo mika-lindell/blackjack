@@ -20,11 +20,6 @@ class AppComponent extends React.Component {
         dealer: null,
       }
     }
-
-    this.state.deck.generate();
-    this.state.deck.shuffle()
-    console.log(this.state.deck);
-
   }
 
   renderCard(card){
@@ -34,10 +29,13 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    const foo = new Card('hearts', 1);
+
+    this.state.deck.collectAndShuffle();
+
+    const card = this.state.deck.draw();
     return (
       <div>
-        {this.renderCard(foo)}      
+        {this.renderCard(card)}      
       </div>
     );
   }
