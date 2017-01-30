@@ -2,7 +2,6 @@ import React from 'react';
 
 import './card.component.scss';
 
-
 // Can we use functional component? */
 class CardComponent extends React.Component {
 

@@ -1,10 +1,8 @@
 import React from 'react';
-import {render} from 'react-dom';
 
 import HandComponent from '../hand/hand.component.jsx';
 
 import Deck from '../deck/deck.jsx';
-import Hand from '../hand/hand.jsx';
 
 import './app.component.scss';
 
@@ -14,35 +12,31 @@ class AppComponent extends React.Component {
     super();
     this.state = {
       deck: new Deck(),
-      hands: {
-        player: new Hand(),
-        dealer: new Hand(),
-      }
+      player: new Array(),
+      dealer: new Array(),
     }
 
   }
 
-  drawFrom(deck, toHand){
-    toHand.hit(deck.draw());
-  }
+  hit(){
 
-  renderHand(hand){
-    return (
-      <HandComponent hand={hand} />
-    );
+    this.state.player.push(this.state.deck.draw())
+    this.setState({
+      player: this.state.player.slice()
+    });
+
   }
 
   render() {
 
     this.state.deck.collectAndShuffle();
 
-    this.drawFrom(this.state.deck, this.state.hands.player);
-    this.drawFrom(this.state.deck, this.state.hands.player);
-    this.drawFrom(this.state.deck, this.state.hands.player);
-
     return (
       <div>
-        {this.renderHand(this.state.hands.player)}
+        <button onClick={()=>this.hit()}>
+          hit me baby!
+        </button>
+        <HandComponent hand={this.state.player} />
       </div>
     );
   }
