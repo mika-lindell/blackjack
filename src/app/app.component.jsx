@@ -22,6 +22,7 @@ class AppComponent extends React.Component {
     }
 
     this.state.deck.generate();
+    this.state.deck.shuffle()
     console.log(this.state.deck);
 
   }
