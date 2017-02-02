@@ -20,6 +20,33 @@ class AppComponent extends React.Component {
 
   }
 
+  render() {
+
+    this.state.playerScore = this.getScore('player');
+    this.state.dealerScore = this.getScore('dealer');
+
+    return (
+      <div>
+        <h2>
+          Dealer <span>{this.state.dealerScore}</span>
+        </h2>
+        <HandComponent hand={this.state.dealer} />
+
+        <h2>
+          Player <span>{this.state.playerScore}</span>
+        </h2>
+        <HandComponent hand={this.state.player} />
+
+        <button onClick={()=>this.deal()}>
+          Deal
+        </button>
+        <button onClick={()=>this.hit()}>
+          Hit
+        </button>
+      </div>
+    );
+  }
+  
   deal(){
     this.state.deck.collectAndShuffle();
     this.reset();
@@ -58,24 +85,7 @@ class AppComponent extends React.Component {
     return total;
   }
 
-  render() {
 
-    this.state.playerScore = this.getScore('player');
-    this.state.dealerScore = this.getScore('dealer');
-
-    return (
-      <div>
-        <HandComponent hand={this.state.player} />
-        <button onClick={()=>this.deal()}>
-          Deal
-        </button>
-        <button onClick={()=>this.hit()}>
-          Hit
-        </button>
-        <span>{this.state.playerScore}</span>
-      </div>
-    );
-  }
 }
 
 export default AppComponent;
