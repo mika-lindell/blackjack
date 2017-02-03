@@ -32,6 +32,7 @@ class Dealer{
     @return {void}
     **/
     deal(howMany = 2){
+      // TODO: Only shuffle deck when ran out of cards so one can count them
       this.deck.collectAndShuffle();
 
       this.hands.forEach((hand, key) => {
