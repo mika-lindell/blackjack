@@ -2,6 +2,7 @@ import React from 'react';
 
 import HandComponent from '../hand/hand.component.jsx';
 
+import Hand from '../hand/hand.jsx';
 import Deck from '../deck/deck.jsx';
 
 import './app.component.scss';
@@ -12,37 +13,54 @@ class AppComponent extends React.Component {
     super();
     this.state = {
       deck: new Deck(),
-      player: new Array(),
-      dealer: new Array(),
+      hands: {
+        player: new Hand(),
+        dealer: new Hand()
+      },
       playerScore: 0,
-      dealerScore: 0
+      dealerScore: 0,
+      gameStatus: 'new'
     }
 
   }
 
   render() {
 
-    this.state.playerScore = this.getScore('player');
-    this.state.dealerScore = this.getScore('dealer');
+    this.state.hands.player.updateScore();
+    this.state.hands.dealer.updateScore();
 
     return (
       <div>
+        <span>{this.state.gameStatus}</span>
         <h2>
-          Dealer <span>{this.state.dealerScore}</span>
+          Dealer <span>{this.state.hands.dealer.score}</span>
         </h2>
-        <HandComponent hand={this.state.dealer} />
+        <HandComponent hand={this.state.hands.dealer} />
 
         <h2>
-          Player <span>{this.state.playerScore}</span>
+          Player <span>{this.state.hands.player.score}</span>
         </h2>
-        <HandComponent hand={this.state.player} />
+        <HandComponent hand={this.state.hands.player} />
 
-        <button onClick={()=>this.deal()}>
-          Deal
+        <button 
+          onClick={()=>this.deal()} 
+          disabled={this.state.gameStatus !== 'new'}
+          >
+            Deal
         </button>
-        <button onClick={()=>this.hit()}>
-          Hit
+        <button 
+          onClick={()=>this.hit(this.state.player, this.state.deck)}
+          disabled={this.state.gameStatus === 'new'}
+          >
+            Hit
         </button>
+        <button 
+          onClick={()=>this.stand()} 
+          disabled={this.state.gameStatus === 'new'}
+          >
+            Stand
+        </button>
+
       </div>
     );
   }
@@ -50,40 +68,62 @@ class AppComponent extends React.Component {
   deal(){
     this.state.deck.collectAndShuffle();
     this.reset();
-    this.hit('player', 2);
-    this.hit('dealer', 2);
+    this.hit(this.state.player, this.state.deck, 2, false);
+    this.hit(this.state.dealer, this.state.deck, 2, false);
+    this.setGameStatus('deal');
   }
 
-  hit(hand = 'player', howMany = 1){
-
-    if (this.state.deck.length === 0) return;
+  hit(hand, deck, howMany = 1, updateState = true){
 
     Array(howMany).fill().map(() =>
-      this.state[hand].push(this.state.deck.draw())
+      hand.push(deck.draw())
     );
 
-    let state = {};
-    state[hand] = this.state[hand].slice();
-    this.setState(state);
+    if(updateState) this.setGameStatus('hit');
 
+  }
+
+  stand(){
+    this.setGameStatus('stand');
   }
 
   reset(){
-
     this.state.dealer = new Array();
     this.state.player = new Array();
-
   }
 
-  getScore(hand = 'player'){
+  getScore(hand){
     let total = 0;
 
-    Array(this.state[hand].length).fill().map((_, i) => 
-      total += this.state[hand][i].numeric
+    Array(hand.length).fill().map((_, i) => 
+      total += hand[i].numeric
     );
 
     return total;
   }
+
+  setGameStatus(status){
+    this.setState({
+      gameStatus: status      
+    })
+  }
+
+  calculateWinner(dealerScore, playerScore){
+
+    let status = {
+      winner: '',
+      reason: ''
+    }
+
+    if(playerScore > 21){
+      status.winner = 'dealer';
+      status.reason = 'player_busted';
+    }
+
+    return status;
+
+  }
+
 
 
 }

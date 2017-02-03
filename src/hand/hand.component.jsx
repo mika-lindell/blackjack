@@ -15,7 +15,7 @@ class HandComponent extends React.Component {
 
     return (
       <div>
-      {this.props.hand.map((value, i)=>
+      {this.props.hand.cards.map((value, i)=>
         <CardComponent key={i} card={value} />
       )} 
       </div>
