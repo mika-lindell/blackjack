@@ -19,7 +19,8 @@ class Dealer{
     **/
     addPlayer(name, hand){
       this.hands.set(name, hand);
-      console.log(this.hands);    }
+      console.log(this.hands);    
+    }
 
     setDeck(deck){
       this.deck = deck;
@@ -37,6 +38,12 @@ class Dealer{
         hand.clear();
         this.hit(key, howMany); 
         hand.calculateScore();
+
+        if(hand.score > 21){
+          hand.clear();
+          this.hit(key, howMany)
+        }
+        
       });
 
     }
@@ -61,7 +68,6 @@ class Dealer{
 
     // Stub
     stand(){
-      this.calculateWinner()
     }
 
     /**
