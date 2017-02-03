@@ -33,13 +33,11 @@ class Dealer{
     deal(howMany = 2){
       this.deck.collectAndShuffle();
 
-      this.hands.forEach( 
-        (hand, key)=>{
-          hand.clear();
-          this.hit(key, howMany); 
-          hand.calculateScore();
-        }
-      );
+      this.hands.forEach((hand, key) => {
+        hand.clear();
+        this.hit(key, howMany); 
+        hand.calculateScore();
+      });
 
     }
 
@@ -63,7 +61,7 @@ class Dealer{
 
     // Stub
     stand(){
-
+      this.calculateWinner()
     }
 
     /**
@@ -78,21 +76,27 @@ class Dealer{
       }
     }
 
-    // calculateWinner(){
+    calculateWinner(){
 
-    //   let status = {
-    //     winner: '',
-    //     reason: ''
-    //   }
+      const winConditions = new Array(
+        '!(a.score > 21)',
+        'a.score <= 21',
+        'a.score > b.score'
+      );
 
-    //   if(playerScore > 21){
-    //     status.winner = 'dealer';
-    //     status.reason = 'player_busted';
-    //   }
+      this.hands.forEach((a, aKey) => {
 
-    //   return status;
+          this.hands.forEach((b, bKey) => {
 
-    // }
+            if(a === b) return;
+
+            winConditions.forEach((value, i) => {
+              console.log(value, eval(value), aKey, a.score, '=>', bKey, b.score);
+            });
+
+          });
+      });
+    }
 
 }
 
