@@ -17,7 +17,7 @@ class Dealer{
     @param {Hand} 
     @return {void}
     **/
-    addHand(name, hand){
+    addPlayer(name, hand){
       this.hands.set(name, hand);
       console.log(this.hands);    }
 

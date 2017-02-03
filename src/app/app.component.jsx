@@ -25,8 +25,8 @@ class AppComponent extends React.Component {
 
     this.dealer = new Dealer();
     this.dealer.setDeck(this.state.deck);
-    this.dealer.addHand('player', this.state.hands.player);
-    this.dealer.addHand('dealer', this.state.hands.dealer);
+    this.dealer.addPlayer('player', this.state.hands.player);
+    this.dealer.addPlayer('dealer', this.state.hands.dealer);
 
   }
 
