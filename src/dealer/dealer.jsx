@@ -43,7 +43,7 @@ class Dealer{
           hand.clear();
           this.hit(key, howMany)
         }
-        
+
       });
 
     }
@@ -71,17 +71,45 @@ class Dealer{
     }
 
     /**
-    @method Play a hand
+    @method Play a hand.
     @param  {string} The name of the hand to be played.
     @return {void}
     **/
     play(name){
-      const hand = this.hands.get(name);
-      while(hand.score < 19){
+
+      const hitConditions = new Array(
+        'a.score !== 21', // Not when we have blackjack
+        'b.score <= 21',  // Not if player is busted
+        'a.score < 19',   // Not if we have high score
+        'a.score < b.score', // Yes if we are lower than player
+      );
+      let a = this.hands.get(name);
+      let matches = 0;
+
+      this.hands.forEach((b, bKey) => {
+        if(a === b) return;
+
+        hitConditions.forEach((value, i) => {
+          if(eval(value)){ 
+            matches++;
+          }
+        });
+      });
+
+      if(matches === hitConditions.length){
+        console.log('Dealer: Hit me!');
         this.hit(name);
-      }
+        this.play(name); // Repeat
+      }else{
+        console.log('Dealer: Stand.');
+      } 
+
     }
 
+    /**
+    @method Detect the would-be winner in current state of the game.
+    @return {void}
+    **/
     calculateWinner(){
 
       const winConditions = new Array(
@@ -93,11 +121,10 @@ class Dealer{
       this.hands.forEach((a, aKey) => {
 
           this.hands.forEach((b, bKey) => {
-
             if(a === b) return;
 
             winConditions.forEach((value, i) => {
-              console.log(value, eval(value), aKey, a.score, '=>', bKey, b.score);
+              // console.log(value, eval(value), aKey, a.score, '=>', bKey, b.score);
             });
 
           });
