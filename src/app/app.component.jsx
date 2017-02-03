@@ -32,9 +32,6 @@ class AppComponent extends React.Component {
 
   render() {
 
-    this.state.hands.player.calculateScore();
-    this.state.hands.dealer.calculateScore();
-
     return (
       <div>
         <span>{this.state.gameStatus}</span>
@@ -85,6 +82,9 @@ class AppComponent extends React.Component {
   stand(){
     this.dealer.stand();
     this.setGameStatus('stand');
+    this.dealer.play('dealer');
+    this.setGameStatus('finished');
+    this.setGameStatus('new');
   }  
 
   setGameStatus(status){

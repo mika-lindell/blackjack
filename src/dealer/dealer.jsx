@@ -35,6 +35,7 @@ class Dealer{
       for(let [key, hand] of this.hands){
         hand.clear();
         this.hit(key, howMany); 
+        hand.calculateScore();
       }
     }
 
@@ -47,17 +48,26 @@ class Dealer{
     hit(name, howMany = 1){
 
       const hand = this.hands.get(name);
-      console.log(hand)
 
       Array(howMany).fill().forEach(() =>
         hand.cards.push(this.deck.draw())
       );
 
+      hand.calculateScore();
+
     }
 
     // Stub
     stand(){
-      
+
+    }
+
+
+    play(name){
+      const hand = this.hands.get(name);
+      while(hand.score < 19){
+        this.hit(name);
+      }
     }
 
     // calculateWinner(){
