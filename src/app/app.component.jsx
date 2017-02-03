@@ -2,8 +2,10 @@ import React from 'react';
 
 import HandComponent from '../hand/hand.component.jsx';
 
-import Hand from '../hand/hand.jsx';
 import Deck from '../deck/deck.jsx';
+import Dealer from '../dealer/dealer.jsx';
+import Hand from '../hand/hand.jsx';
+
 
 import './app.component.scss';
 
@@ -11,16 +13,20 @@ class AppComponent extends React.Component {
 
   constructor(){
     super();
+    
     this.state = {
       deck: new Deck(),
       hands: {
         player: new Hand(),
         dealer: new Hand()
       },
-      playerScore: 0,
-      dealerScore: 0,
       gameStatus: 'new'
-    }
+    };
+
+    this.dealer = new Dealer();
+    this.dealer.setDeck(this.state.deck);
+    this.dealer.addHand('player', this.state.hands.player);
+    this.dealer.addHand('dealer', this.state.hands.dealer);
 
   }
 
@@ -49,7 +55,7 @@ class AppComponent extends React.Component {
             Deal
         </button>
         <button 
-          onClick={()=>this.hit(this.state.player, this.state.deck)}
+          onClick={()=>this.hit()}
           disabled={this.state.gameStatus === 'new'}
           >
             Hit
@@ -64,67 +70,28 @@ class AppComponent extends React.Component {
       </div>
     );
   }
-  
+
+
   deal(){
-    this.state.deck.collectAndShuffle();
-    this.reset();
-    this.hit(this.state.player, this.state.deck, 2, false);
-    this.hit(this.state.dealer, this.state.deck, 2, false);
+    this.dealer.deal();
     this.setGameStatus('deal');
   }
 
-  hit(hand, deck, howMany = 1, updateState = true){
-
-    Array(howMany).fill().map(() =>
-      hand.push(deck.draw())
-    );
-
-    if(updateState) this.setGameStatus('hit');
-
+  hit(){
+    this.dealer.hit(this.state.hands.player);
+    this.setGameStatus('hit');
   }
 
   stand(){
+    this.dealer.stand();
     this.setGameStatus('stand');
-  }
-
-  reset(){
-    this.state.dealer = new Array();
-    this.state.player = new Array();
-  }
-
-  getScore(hand){
-    let total = 0;
-
-    Array(hand.length).fill().map((_, i) => 
-      total += hand[i].numeric
-    );
-
-    return total;
-  }
+  }  
 
   setGameStatus(status){
     this.setState({
       gameStatus: status      
     })
   }
-
-  calculateWinner(dealerScore, playerScore){
-
-    let status = {
-      winner: '',
-      reason: ''
-    }
-
-    if(playerScore > 21){
-      status.winner = 'dealer';
-      status.reason = 'player_busted';
-    }
-
-    return status;
-
-  }
-
-
 
 }
 

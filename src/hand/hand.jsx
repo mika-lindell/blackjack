@@ -12,7 +12,12 @@ class Hand {
       total += this.cards[i].numeric
     );
 
-    return total;
+    this.score = total;
+  }
+
+  clear(){
+    this.cards = new Array();
+    this.score = 0;
   }
 
 }
