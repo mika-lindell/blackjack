@@ -13,7 +13,7 @@ class Dealer{
 
     /**
     @method Let dealer know about the players in this game.
-    @param {String} The name of the hand.
+    @param {string} The name of the hand.
     @param {Hand} 
     @return {void}
     **/
@@ -27,31 +27,35 @@ class Dealer{
 
     /**
     @method Reset and deal card(s) to every known hand
-    @param  {Integer} The amount of cards to be dealt for single hand.
+    @param  {integer} The amount of cards to be dealt for single hand.
     @return {void}
     **/
     deal(howMany = 2){
       this.deck.collectAndShuffle();
-      for(let [key, hand] of this.hands){
-        hand.clear();
-        this.hit(key, howMany); 
-        hand.calculateScore();
-      }
+
+      this.hands.forEach( 
+        (hand, key)=>{
+          hand.clear();
+          this.hit(key, howMany); 
+          hand.calculateScore();
+        }
+      );
+
     }
 
     /**
     @method Add card(s) to a hand known by dealer
     @param  {string} The name of the hand card(s) will be added to.
-    @param  {Integer} The amount of cards to be added.
+    @param  {integer} The amount of cards to be added.
     @return {void}
     **/
     hit(name, howMany = 1){
 
       const hand = this.hands.get(name);
 
-      Array(howMany).fill().forEach(() =>
+      for(let i of [...Array(howMany)]){
         hand.cards.push(this.deck.draw())
-      );
+      }
 
       hand.calculateScore();
 
@@ -62,7 +66,11 @@ class Dealer{
 
     }
 
-
+    /**
+    @method Play a hand
+    @param  {string} The name of the hand to be played.
+    @return {void}
+    **/
     play(name){
       const hand = this.hands.get(name);
       while(hand.score < 19){
