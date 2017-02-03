@@ -32,8 +32,8 @@ class AppComponent extends React.Component {
 
   render() {
 
-    this.state.hands.player.updateScore();
-    this.state.hands.dealer.updateScore();
+    this.state.hands.player.calculateScore();
+    this.state.hands.dealer.calculateScore();
 
     return (
       <div>
@@ -78,7 +78,7 @@ class AppComponent extends React.Component {
   }
 
   hit(){
-    this.dealer.hit(this.state.hands.player);
+    this.dealer.hit('player');
     this.setGameStatus('hit');
   }
 

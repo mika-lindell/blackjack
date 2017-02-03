@@ -1,12 +1,18 @@
 import Card from '../card/card.jsx';
 
-
+/**
+@class Holds the cards available for the game.
+**/
 class Deck {
 
   constructor(){
     this.cards = null;
   }
 
+  /**
+  @method Generate standard 52-card deck without jokers.
+  @return void
+  **/
   generate(){
 
     const cards = Array(52).fill();
@@ -48,10 +54,10 @@ class Deck {
   }
 
   /**
-   * Randomize array element order in-place.
-   * Using Durstenfeld shuffle algorithm.
-   * http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-   */
+  @Method Randomize array element order in-place Using Durstenfeld shuffle algorithm.
+  http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  @return void
+  **/
   shuffle() {
       let shuffled = this.cards.slice();
 
@@ -65,10 +71,18 @@ class Deck {
       this.cards =  shuffled;
   }
 
+  /**
+  @method Draw a card from deck.
+  @return {void}
+  **/
   draw(){
     return this.cards.shift();
   }
 
+  /**
+  @method Reset the deck and shuffle.
+  @return {void}
+  **/
   collectAndShuffle(){
     this.generate();
     this.shuffle();

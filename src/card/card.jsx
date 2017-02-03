@@ -1,3 +1,6 @@
+/**
+@class Single card held in Deck or in Hand
+**/
 class Card {
 
   constructor(args = {}){

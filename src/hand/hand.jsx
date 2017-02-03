@@ -1,3 +1,6 @@
+/**
+@class Holds cards and score of a single hand.
+**/
 class Hand {
 
   constructor(){
@@ -5,7 +8,10 @@ class Hand {
     this.score = 0
   }
 
-  updateScore(){
+  /**
+  @method Calculate total score of the hand from cards
+  **/
+  calculateScore(){
     let total = 0;
 
     Array(this.cards.length).fill().map((_, i) => 
@@ -15,6 +21,9 @@ class Hand {
     this.score = total;
   }
 
+  /**
+  @method Remove all cards and reset score.
+  **/
   clear(){
     this.cards = new Array();
     this.score = 0;
