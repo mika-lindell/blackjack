@@ -77,32 +77,34 @@ class Dealer{
     **/
     play(name){
 
+      console.log('play():');
+
       const hitConditions = new Array(
-        'a.score !== 21', // Not when we have blackjack
+        'a.score <= 21', 
         'b.score <= 21',  // Not if player is busted
-        'a.score < 19',   // Not if we have high score
         'a.score < b.score', // Yes if we are lower than player
       );
       let a = this.hands.get(name);
-      let matches = 0;
+      let trophies = 0;
 
       this.hands.forEach((b, bKey) => {
         if(a === b) return;
 
         hitConditions.forEach((value, i) => {
+          // If all conditions eval() true, will take another card
           if(eval(value)){ 
-            matches++;
+            trophies++;
           }
+          
+          console.log(value, eval(value), name, a.score, '=>', bKey, b.score);
+
         });
       });
 
-      if(matches === hitConditions.length){
-        console.log('Dealer: Hit me!');
+      if(trophies === hitConditions.length){
         this.hit(name);
         this.play(name); // Repeat
-      }else{
-        console.log('Dealer: Stand.');
-      } 
+      }
 
     }
 
@@ -112,23 +114,39 @@ class Dealer{
     **/
     calculateWinner(){
 
+      console.log('calculateWinner():');
+
       const winConditions = new Array(
-        '!(a.score > 21)',
-        'a.score <= 21',
-        'a.score > b.score'
+        'a.score <= 21', 
+        '!(a.score > 21)', // Lose if busted
+        'a.score > b.score', // Win if higher score
       );
 
+      let trophies = new Object();
+
       this.hands.forEach((a, aKey) => {
+
+          if(!(trophies[aKey])) trophies[aKey] = 0;
 
           this.hands.forEach((b, bKey) => {
             if(a === b) return;
 
             winConditions.forEach((value, i) => {
-              // console.log(value, eval(value), aKey, a.score, '=>', bKey, b.score);
+              if(eval(value)){ 
+                trophies[aKey]++;
+              }
+              
+              console.log(value, eval(value), aKey, a.score, '=>', bKey, b.score);
             });
 
           });
       });
+
+      const winner = Object.keys(trophies).reduce(
+        (a, b) => { return trophies[a] > trophies[b] ? a : b });
+
+      return winner;
+
     }
 
 }

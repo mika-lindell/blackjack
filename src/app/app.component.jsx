@@ -20,7 +20,8 @@ class AppComponent extends React.Component {
         player: new Hand(),
         dealer: new Hand()
       },
-      gameStatus: 'new'
+      gameStatus: 'new',
+      winner: null
     };
 
     this.dealer = new Dealer();
@@ -34,7 +35,7 @@ class AppComponent extends React.Component {
 
     return (
       <div>
-        <span>{this.state.gameStatus}</span>
+        <span>{this.state.gameStatus} / {this.state.winner}</span>
         <h2>
           Dealer <span>{this.state.hands.dealer.score}</span>
         </h2>
@@ -83,7 +84,7 @@ class AppComponent extends React.Component {
     this.dealer.stand();
     this.setGameStatus('stand');
     this.dealer.play('dealer');
-    this.dealer.calculateWinner();
+    this.state.winner = this.dealer.calculateWinner();
     this.setGameStatus('finished');
     this.setGameStatus('new');
   }  
