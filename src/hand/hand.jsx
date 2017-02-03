@@ -22,7 +22,7 @@ class Hand {
   }
 
   /**
-  @method Remove all cards and reset score.
+  @method Remove all cards from hand and reset score.
   **/
   clear(){
     this.cards = new Array();

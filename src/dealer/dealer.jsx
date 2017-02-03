@@ -42,7 +42,6 @@ class Dealer{
     @method Add card(s) to a hand known by dealer
     @param  {string} The name of the hand card(s) will be added to.
     @param  {Integer} The amount of cards to be added.
-    @param  {Function} The function to be called after the cards have been aded
     @return {void}
     **/
     hit(name, howMany = 1){
@@ -56,6 +55,7 @@ class Dealer{
 
     }
 
+    // Stub
     stand(){
       
     }
