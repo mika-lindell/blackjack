@@ -83,6 +83,7 @@ class AppComponent extends React.Component {
     this.dealer.stand();
     this.setGameStatus('stand');
     this.dealer.play('dealer');
+    this.dealer.calculateWinner();
     this.setGameStatus('finished');
     this.setGameStatus('new');
   }  
