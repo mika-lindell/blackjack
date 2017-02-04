@@ -79,8 +79,7 @@ class AppComponent extends React.Component {
     this.dealer.hit('player');
 
     if(this.state.hands.player.score > 21){
-      this.state.winner = this.dealer.calculateWinner();
-      this.setGameStatus('new');
+      this.stand();
     }else{
       this.setGameStatus('hit');
     }
@@ -90,6 +89,7 @@ class AppComponent extends React.Component {
   stand(){
     this.dealer.stand();
     this.setGameStatus('stand');
+    this.dealer.flip('dealer');
     this.dealer.play('dealer');
     this.state.winner = this.dealer.calculateWinner();
     this.setGameStatus('new');

@@ -116,6 +116,14 @@ class Dealer{
 
     }
 
+    flip(name, upsideDown = false){
+      const hand = this.hands.get(name);
+
+      hand.cards.forEach((card, i) => {
+        card.isUpsideDown = upsideDown;
+      });
+    }
+
     /**
     @method Detect the would-be winner in current state of the game.
     @return {void}
