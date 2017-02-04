@@ -12,10 +12,17 @@ class CardComponent extends React.Component {
   render() {
     return (
       <img 
-        src={`/public/deck/${this.props.card.svg}.svg`} 
-        alt={this.props.svg} 
+        src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
+        alt={this.props.name} 
         />
     );
+  }
+
+  getCardImageName(card){
+    if(card.isUpsideDown)
+      return 'back';
+    else
+      return card.name;
   }
 
 }

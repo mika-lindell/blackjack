@@ -8,6 +8,10 @@ class Hand {
     this.score = 0
   }
 
+  addCard(card){
+    this.cards.push(card);
+  }
+
   /**
   @method Calculate total score of the hand from cards
   **/

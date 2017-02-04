@@ -32,9 +32,7 @@ class Dealer{
     @return {void}
     **/
     deal(howMany = 2){
-      // TODO: Only shuffle deck when ran out of cards so one can count them
-      this.deck.collectAndShuffle();
-
+      
       this.hands.forEach((hand, key) => {
         hand.clear();
         this.hit(key, howMany); 
@@ -58,10 +56,19 @@ class Dealer{
     hit(name, howMany = 1){
 
       const hand = this.hands.get(name);
+      let upsideDown = false;
 
-      for(let i of [...Array(howMany)]){
-        hand.cards.push(this.deck.draw())
-      }
+      if(!this.deck.cards || this.deck.cards.length < howMany) 
+        this.deck.collectAndShuffle();
+
+      Array(howMany).fill().forEach( (_, i) => {
+        if(name === 'dealer' && i === 1)
+          upsideDown = true;
+        else
+          upsideDown = false;
+
+        hand.addCard(this.deck.draw(upsideDown));
+      });
 
       hand.calculateScore();
 

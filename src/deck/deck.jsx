@@ -54,7 +54,7 @@ class Deck {
   }
 
   /**
-  @Method Randomize array element order in-place Using Durstenfeld shuffle algorithm.
+  @Method Shuffle the deck
   http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   @return void
   **/
@@ -75,8 +75,10 @@ class Deck {
   @method Draw a card from deck.
   @return {void}
   **/
-  draw(){
-    return this.cards.shift();
+  draw(upsideDown = false){
+    const card = this.cards.shift();
+    card.isUpsideDown = upsideDown;
+    return card;
   }
 
   /**
@@ -86,6 +88,7 @@ class Deck {
   collectAndShuffle(){
     this.generate();
     this.shuffle();
+    console.log('collectAndShuffle()');
   }
 
 
