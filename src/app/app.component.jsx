@@ -1,8 +1,10 @@
 import React from 'react';
-import {render} from 'react-dom';
 
-import Card from '../card/card.type.jsx';
-import CardComponent from '../card/card.component.jsx';
+import HandComponent from '../hand/hand.component.jsx';
+
+import Deck from '../deck/deck.jsx';
+import Dealer from '../dealer/dealer.jsx';
+import Hand from '../hand/hand.jsx';
 
 
 import './app.component.scss';
@@ -11,29 +13,94 @@ class AppComponent extends React.Component {
 
   constructor(){
     super();
+    
     this.state = {
-      deck: null,
+      deck: new Deck(),
       hands: {
-        player: null,
-        dealer: null,
-      }
-    }
-  }
+        player: new Hand(),
+        dealer: new Hand()
+      },
+      gameStatus: 'new',
+      winner: null
+    };
 
-  renderCard(card){
-    return(
-        <CardComponent suit={card.suit} index={card.index} />
-      );
+    this.dealer = new Dealer();
+    this.dealer.setDeck(this.state.deck);
+    this.dealer.addPlayer('player', this.state.hands.player);
+    this.dealer.addPlayer('dealer', this.state.hands.dealer);
+
   }
 
   render() {
-    const foo = new Card('hearts', 1);
+
     return (
       <div>
-        {this.renderCard(foo)}      
+        <span>State: {this.state.gameStatus}, Winner: {this.state.winner}</span>
+        <h2>
+          Dealer <span>{this.state.hands.dealer.score}</span>
+        </h2>
+        <HandComponent hand={this.state.hands.dealer} />
+
+        <h2>
+          Player <span>{this.state.hands.player.score}</span>
+        </h2>
+        <HandComponent hand={this.state.hands.player} />
+
+        <button 
+          onClick={()=>this.deal()} 
+          disabled={this.state.gameStatus !== 'new'}
+          >
+            Deal
+        </button>
+        <button 
+          onClick={()=>this.hit()}
+          disabled={this.state.gameStatus === 'new'}
+          >
+            Hit
+        </button>
+        <button 
+          onClick={()=>this.stand()} 
+          disabled={this.state.gameStatus === 'new'}
+          >
+            Stand
+        </button>
+
       </div>
     );
   }
+
+
+  deal(){
+    this.dealer.deal();
+    this.setGameStatus('deal');
+  }
+
+  hit(){
+    this.dealer.hit('player');
+
+    if(this.state.hands.player.score > 21){
+      this.state.winner = this.dealer.calculateWinner();
+      this.setGameStatus('new');
+    }else{
+      this.setGameStatus('hit');
+    }
+
+  }
+
+  stand(){
+    this.dealer.stand();
+    this.setGameStatus('stand');
+    this.dealer.play('dealer');
+    this.state.winner = this.dealer.calculateWinner();
+    this.setGameStatus('new');
+  }  
+
+  setGameStatus(status){
+    this.setState({
+      gameStatus: status      
+    })
+  }
+
 }
 
 export default AppComponent;
