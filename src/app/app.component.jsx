@@ -18,8 +18,8 @@ class AppComponent extends React.Component {
     this.state = {
       deck: new Deck(),
       hands: {
-        player: new Hand(),
-        dealer: new Hand()
+        player: new Hand('player'),
+        dealer: new Hand('dealer')
       },
       gameStatus: 'new',
       winner: null
@@ -27,8 +27,8 @@ class AppComponent extends React.Component {
 
     this.dealer = new Dealer();
     this.dealer.setDeck(this.state.deck);
-    this.dealer.addPlayer('player', this.state.hands.player);
-    this.dealer.addPlayer('dealer', this.state.hands.dealer);
+    this.dealer.addPlayer(this.state.hands.player);
+    this.dealer.addPlayer(this.state.hands.dealer);
 
   }
 

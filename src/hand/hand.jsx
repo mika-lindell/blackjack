@@ -3,9 +3,10 @@
 **/
 class Hand {
 
-  constructor(){
+  constructor(name){
+    this.name = name;
     this.cards = new Array();
-    this.score = 0
+    this.score = 0;
   }
 
   addCard(card){

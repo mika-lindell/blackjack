@@ -14,10 +14,16 @@ class HandComponent extends React.Component {
   render() {
 
     return (
-      <div>
-      {this.props.hand.cards.map((value, key)=>
-        <CardComponent key={key} card={value} />
-      )} 
+      <div
+        className="hand"
+        data-name={this.props.hand.name}
+      >
+        <h2>
+          {this.props.hand.name} <span>{this.props.hand.score}</span>
+        </h2>
+          {this.props.hand.cards.map((value, key)=>
+            <CardComponent key={key} card={value} />
+          )} 
       </div>
     );
 
