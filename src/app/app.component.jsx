@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HandComponent from '../hand/hand.component.jsx';
+import ControlsComponent from '../controls/controls.component.jsx';
 
 import Deck from '../deck/deck.jsx';
 import Dealer from '../dealer/dealer.jsx';
@@ -36,34 +37,21 @@ class AppComponent extends React.Component {
     return (
       <div>
         <span>State: {this.state.gameStatus}, Winner: {this.state.winner}</span>
-        <h2>
-          Dealer <span>{this.state.hands.dealer.score}</span>
-        </h2>
-        <HandComponent hand={this.state.hands.dealer} />
 
-        <h2>
-          Player <span>{this.state.hands.player.score}</span>
-        </h2>
-        <HandComponent hand={this.state.hands.player} />
+        <HandComponent 
+          hand={this.state.hands.dealer} 
+        />
 
-        <button 
-          onClick={()=>this.deal()} 
-          disabled={this.state.gameStatus !== 'new'}
-          >
-            Deal
-        </button>
-        <button 
-          onClick={()=>this.hit()}
-          disabled={this.state.gameStatus === 'new'}
-          >
-            Hit
-        </button>
-        <button 
-          onClick={()=>this.stand()} 
-          disabled={this.state.gameStatus === 'new'}
-          >
-            Stand
-        </button>
+        <HandComponent 
+          hand={this.state.hands.player} 
+        />
+
+        <ControlsComponent 
+          deal={() => this.deal()} 
+          hit={() => this.hit()} 
+          stand={() => this.stand()} 
+          gameStatus={this.state.gameStatus}
+        />
 
       </div>
     );
