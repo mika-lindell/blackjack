@@ -19,9 +19,10 @@ class Hand {
   calculateScore(){
     let total = 0;
 
-    Array(this.cards.length).fill().map((_, i) => 
-      total += this.cards[i].numeric
-    );
+    Array(this.cards.length).fill().map((_, i) => {
+      if(!this.cards[i].isUpsideDown)
+        total += this.cards[i].numeric
+    });
 
     this.score = total;
   }

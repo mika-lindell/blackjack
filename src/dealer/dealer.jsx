@@ -142,6 +142,8 @@ class Dealer{
 
       this.hands.forEach((a, aKey) => {
 
+          a.calculateScore();
+
           if(!(trophies[aKey])) trophies[aKey] = 0;
 
           this.hands.forEach((b, bKey) => {
