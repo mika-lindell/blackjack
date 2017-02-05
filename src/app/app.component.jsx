@@ -35,7 +35,9 @@ class AppComponent extends React.Component {
   render() {
 
     return (
-      <div>
+      <div
+        className="table" 
+      >
         <span>State: {this.state.gameStatus}, Winner: {this.state.winner}</span>
 
         <HandComponent 
