@@ -1,4 +1,37 @@
-p{
-  color: red;
-  background-color: green;
+@import '../scss/vars';
+
+body{  
+
+  width: 100%;  
+  height: 100%;
+
+  min-width: $layout-max-width;  
+  min-height: $layout-max-height;
+
+  background-color: $canvas;
+
+  // Camera perspective
+  perspective: $camera-distance;
+  -webkit-perspective: $camera-distance;
+  -moz-perspective: $camera-distance;
 }
+
+#app{
+
+  width: $layout-max-width;  
+  height: $layout-max-height;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -($layout-max-height / 2);
+  margin-left: -($layout-max-height / 2);
+ 
+
+  vertical-align: middle;
+
+  // Camera angle
+  transform: rotateX($camera-angle);
+  
+}
+

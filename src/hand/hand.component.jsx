@@ -4,6 +4,7 @@ import CardComponent from '../card/card.component.jsx';
 
 import Card from '../card/card.jsx';
 
+import './hand.component.scss';
 
 class HandComponent extends React.Component {
 

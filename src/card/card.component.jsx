@@ -13,7 +13,8 @@ class CardComponent extends React.Component {
     return (
       <img 
         src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
-        alt={this.props.name} 
+        alt={this.props.name}
+        className='card' 
         />
     );
   }
@@ -28,4 +29,3 @@ class CardComponent extends React.Component {
 }
 
 export default CardComponent;
-//{`/public/images/cards.svg#${this.props.svg}`} 

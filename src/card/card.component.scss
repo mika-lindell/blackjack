@@ -1,3 +1,16 @@
-button{
-  color: blue;
+@import '../scss/vars';
+@import '../scss/mixins';
+
+.card{
+  width: 11rem;
+  height: auto;
+  margin: 0.5 0.5rem;
+
+  @include rounded(0.5rem);
+  @include box-shadow(0rem, 0.2rem, 0.5rem, rgba(29, 29, 29, 0.17));
 }
+
+.card + .card{
+  margin-left: -9.6rem;
+}
+
