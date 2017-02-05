@@ -8,6 +8,8 @@ body{
   min-width: $layout-max-width;  
   min-height: $layout-max-height;
 
+  overflow: hidden;
+
   background-color: $canvas;
 
   // Camera perspective
