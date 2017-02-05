@@ -1,17 +1,26 @@
+@import '../scss/vars';
+@import '../scss/mixins';
+
 .hand{
   display: inline-block;
   position: absolute;
+  width: 20rem;
+  height: 20rem;
+  text-align: center;
+
+
 }
 
 .hand[data-name="dealer"]{
   right: 0rem;
-
   transform: rotateZ(20deg);
 }
 
 .hand[data-name="player"]{
   bottom: 0rem;
   left: 0rem;
-
   transform: rotateZ(-5deg);
+  border: 1rem solid $table-texture-print-color;
+
+  @include rounded(50%);
 }
