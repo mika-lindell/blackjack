@@ -75,9 +75,9 @@ class Deck {
   @method Draw a card from deck.
   @return {void}
   **/
-  draw(upsideDown = false){
+  draw(hidden = false){
     const card = this.cards.shift();
-    card.isUpsideDown = upsideDown;
+    card.hidden = hidden;
     return card;
   }
 

@@ -24,7 +24,7 @@ class Hand {
     Array(this.cards.length).fill().map((_, i) => {
 
        total += this.cards[i].numeric
-      if(!this.cards[i].isUpsideDown)
+      if(!this.cards[i].hidden)
         viewTotal += this.cards[i].numeric
 
     });

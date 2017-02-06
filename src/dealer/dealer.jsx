@@ -65,18 +65,18 @@ class Dealer{
 
       const hand = this.hands.get(name);
       let i = 0;
-      let upsideDown = false;
+      let hidden = false;
 
       if(!this.deck.cards || this.deck.cards.length < howMany) 
         this.deck.collectAndShuffle();
 
       [...Array(howMany)].forEach( (_, i) => {
         if(name === 'dealer' && i === 1)
-          upsideDown = true;
+          hidden = true;
         else
-          upsideDown = false;
+          hidden = false;
 
-        hand.addCard(this.deck.draw(upsideDown));
+        hand.addCard(this.deck.draw(hidden));
       });
 
       hand.calculateScore();
@@ -133,11 +133,11 @@ class Dealer{
 
     }
 
-    flip(name, upsideDown = false){
+    flip(name, hidden = false){
       const hand = this.hands.get(name);
 
       hand.cards.forEach((card, i) => {
-        card.isUpsideDown = upsideDown;
+        card.hidden = hidden;
       });
     }
 
