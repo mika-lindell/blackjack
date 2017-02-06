@@ -1,3 +1,6 @@
+#app{
+  @include box-shadow(0, 0, 40rem, rgba(0, 0, 0, 0.59), true); // Vignette-effect
+}
 .table{
 
   // Camera angle
