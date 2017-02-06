@@ -30,20 +30,7 @@ body{
   -webkit-perspective: $camera-distance;
   -moz-perspective: $camera-distance;
 
-  // &:before{
-  //   content: '';
-  //   position: absolute;
-  //   top: -50%;
-  //   left: -50%;
-  //   height: 200%;
-  //   width: 200%;
-  //   background-image: $table-texture;
-  //   background-position: 50% 50%;
-  //   background-repeat: no-repeat;
-  //   background-size: cover;    
-  //    transform: rotateX($camera-angle);
-  // }
-
+  @extend .font-regular;
 }
 
 h1{

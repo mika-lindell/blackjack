@@ -8,13 +8,21 @@
   white-space: nowrap;
 }
 
+
+.hand-name{
+  position: absolute;
+  width: $table-status-size;
+  @extend .font-size-regular, .text-center, .uppercase; 
+}
+
+
 .hand-score{
   display: block;
   position: fixed;
 
   border: 0.3rem solid;
 
-  line-height:  $table-score-size * 0.9;
+  line-height:  $table-score-size * 0.8;
   width: $table-score-size;
   height: $table-score-size;
 
@@ -43,6 +51,15 @@
   border: 1rem solid $table-texture-print-color;
 
   @include rounded(50%);
+}
+
+.hand[data-name="dealer"] .hand-name{
+  top: -1.5rem;
+}
+
+.hand[data-name="player"] .hand-name{
+  top: 1rem;
+  left: 4.6rem;
 }
 
 .hand[data-name="dealer"] .hand-score{
