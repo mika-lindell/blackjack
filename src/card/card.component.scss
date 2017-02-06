@@ -24,7 +24,7 @@
   transition: top 0.3s ease-in, opacity 0.1s ease-in;
 
   @include rounded(0.5rem);
-  @include box-shadow(-0.2rem, 0.2rem, 0.5rem, rgba(29, 29, 29, 0.17));
+  @extend .box-shadow-light; 
 }
 
 // Animations

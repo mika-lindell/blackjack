@@ -34,6 +34,20 @@
   text-align: center;
 }
 
+.box-shadow-light{
+   @include box-shadow(-0.2rem, 0.2rem, 0.5rem, $shadow-color-light);
+} 
+
+.box-shadow-medium{
+   @include box-shadow(0rem, 0.2rem, 1rem, $shadow-color-medium);
+} 
+
+.text-shadow-medium{
+  text-shadow: 0rem 0.2rem 1rem $shadow-color-medium;
+}
+
+
+
 .uppercase{
   text-transform: uppercase;
 }

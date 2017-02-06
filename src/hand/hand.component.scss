@@ -12,7 +12,8 @@
 .hand-name{
   position: absolute;
   width: $table-status-size;
-  @extend .font-size-regular, .text-center, .uppercase; 
+    
+  @extend .font-size-regular, .text-center, .uppercase, .text-shadow-medium; 
 }
 
 
@@ -26,7 +27,7 @@
   width: $table-score-size;
   height: $table-score-size;
 
-  @extend .font-size-medium, .font-weight-bold, .text-center;
+  @extend .font-size-medium, .font-weight-bold, .text-center, .box-shadow-medium;
   @include rounded(50%);
 
 }
@@ -34,7 +35,8 @@
 .hand-status{
   position: absolute;
   width: $table-status-size;
-  @extend .font-size-regular, .text-center, .uppercase; 
+
+  @extend .font-size-regular, .text-center, .uppercase, .text-shadow-medium; 
 }
 
 .hand[data-name="dealer"]{
@@ -73,12 +75,12 @@
 }
 
 .hand[data-name="dealer"] .hand-status{
-  top: 10.5rem;
+  top: 10rem;
   left: -10.2rem;
 }
 
 .hand[data-name="player"] .hand-status{
-  top: 13rem;
+  top: 12.4rem;
   left: -10.1rem;
 }
 

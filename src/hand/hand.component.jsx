@@ -25,7 +25,7 @@ class HandComponent extends React.Component {
         <span
           className="hand-score"
         >
-          {this.props.hand.score}
+          {this.props.hand.viewScore}
         </span>
 
         <span 
