@@ -7,6 +7,7 @@ class Hand {
     this.name = name;
     this.cards = new Array();
     this.score = 0;
+    this.prevScore = 0;
   }
 
   addCard(card){
@@ -24,6 +25,7 @@ class Hand {
         total += this.cards[i].numeric
     });
 
+    this.prevScore = this.score;
     this.score = total;
   }
 
