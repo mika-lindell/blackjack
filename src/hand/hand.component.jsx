@@ -38,7 +38,7 @@ class HandComponent extends React.Component {
         }
 
         {this.props.hand.cards.map((value, key)=>
-          <CardComponent key={key} card={value} />
+          <CardComponent key={value.name} card={value} />
         )} 
       </div>
     );

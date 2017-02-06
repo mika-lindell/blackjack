@@ -1,16 +1,48 @@
 
+.card-container{
+  display: inline-block;
+  margin: 0rem 0.5rem;
+  margin-left: -1rem;
+}
+
+.card-container + .card-container{
+    margin-left: -8.5rem;
+}
 
 .card{
   width: 10rem;
   height: auto;
-  margin: 0rem 0.5rem;
-  margin-left: -1rem;
+
+  transition: opacity 300ms ease-in;
 
   @include rounded(0.5rem);
   @include box-shadow(-0.2rem, 0.2rem, 0.5rem, rgba(29, 29, 29, 0.17));
 }
 
 .card + .card{
-  margin-left: -8.5rem;
+
 }
 
+.draw-appear {
+  opacity: 0.01;
+}
+
+.draw-appear.draw-appear-active {
+  opacity: 1;
+}
+
+.draw-enter {
+  opacity: 0.01;
+}
+
+.draw-enter.draw-enter-active {
+  opacity: 1;
+}
+
+.draw-leave {
+  opacity: 1;
+}
+
+.draw-leave.draw-leave-active {
+  opacity: 0.01;
+}

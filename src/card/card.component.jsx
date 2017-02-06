@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Can we use functional component?
 class CardComponent extends React.Component {
@@ -9,11 +10,22 @@ class CardComponent extends React.Component {
 
   render() {
     return (
-      <img 
-        src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
-        alt={this.props.name}
-        className='card' 
-        />
+      <ReactCSSTransitionGroup
+        component="div"
+        className="card-container"
+        transitionName="draw" 
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}
+      >
+        <img
+          data-key={this.props.key}  
+          src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
+          alt={this.props.name}
+          className='card' 
+          />
+      </ReactCSSTransitionGroup>
     );
   }
 
