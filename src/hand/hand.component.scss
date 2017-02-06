@@ -1,11 +1,25 @@
-@import '../scss/vars';
-@import '../scss/mixins';
+
 
 .hand{
   display: inline-block;
   position: absolute;
   width: 22rem;
   height: 22rem;
+}
+
+.hand-score{
+  display: block;
+  position: fixed;
+
+  border: 0.3rem solid;
+
+  line-height:  $table-score-size * 0.9;
+  width: $table-score-size;
+  height: $table-score-size;
+
+  @extend .font-size-medium, .font-weight-bold, .text-center;
+  @include rounded(50%);
+
 }
 
 .hand[data-name="dealer"]{
@@ -15,10 +29,21 @@
 }
 
 .hand[data-name="player"]{
+  padding-top: 2.5rem;
   bottom: 1rem;
   left: 2rem;
   transform: rotateZ(-5deg);
   border: 1rem solid $table-texture-print-color;
 
   @include rounded(50%);
+}
+
+.hand[data-name="dealer"] .hand-score{
+  left: -7.5rem;
+  top: 4.7rem;
+}
+
+.hand[data-name="player"] .hand-score{
+  left: -7.5rem;
+  top: 7rem;
 }
