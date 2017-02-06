@@ -23,7 +23,7 @@
 }
 
 .hand[data-name="dealer"]{
-  right: -3rem;
+  right: -5rem;
   top: 0rem;
   transform: rotateZ(20deg);
 }
@@ -31,7 +31,7 @@
 .hand[data-name="player"]{
   padding-top: 2.5rem;
   bottom: 1rem;
-  left: 2rem;
+  left: 6rem;
   transform: rotateZ(-5deg);
   border: 1rem solid $table-texture-print-color;
 
