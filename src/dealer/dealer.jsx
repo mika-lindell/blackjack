@@ -92,7 +92,7 @@ class Dealer{
     @param  {string} The name of the hand to be played.
     @return {void}
     **/
-    play(name){
+    play(name, between = null, completed = null){
 
       console.log('play():');
 
@@ -121,8 +121,14 @@ class Dealer{
       });
 
       if(trophies === hitConditions.length){
+        // Take another card
         this.hit(name);
-        this.play(name); // Repeat
+        if(between) between.call();
+
+        setTimeout(() => this.play(name, between, completed), 500);
+      }else{
+        // Done playing
+        if(completed) completed.call();
       }
 
     }

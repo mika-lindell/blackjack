@@ -84,7 +84,6 @@ class AppComponent extends React.Component {
     document.removeEventListener('keypress', this.handleKeyPress);
   }
 
-
   deal(){
     if(this.state.gameStatus !== 'new') return;
 
@@ -103,17 +102,30 @@ class AppComponent extends React.Component {
     }else{
       this.setGameStatus('hit');
     }
-
   }
 
   stand(){
     if(this.state.gameStatus === 'new') return;
+
     this.dealer.stand();
     this.setGameStatus('stand');
-    this.dealer.flip('dealer');
-    this.dealer.play('dealer');
-    this.state.winner = this.dealer.calculateWinner();
-    this.setGameStatus('new');
+
+    setTimeout(()=>{
+
+      this.dealer.flip('dealer');
+
+      const between = ()=> {
+        this.setGameStatus('new');
+      }
+
+      const completed = ()=> {
+        this.state.winner = this.dealer.calculateWinner();  
+        this.setGameStatus('new');    
+      }
+
+      this.dealer.play('dealer', ()=> between(), ()=> completed());
+
+    }, 200);
   }  
 
   setGameStatus(status){
