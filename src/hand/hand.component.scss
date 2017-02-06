@@ -32,6 +32,19 @@
 
 }
 
+.hand-busted{
+  position: absolute;
+
+  color: $busted-color;
+  border: 0.3rem solid  $busted-color;
+  padding: 0rem 0.5rem;  
+
+  transform: rotateZ(-45deg);
+  transition: all 0.3s ease-in;
+
+  @extend .layer-top, .font-size-large, .uppercase, .text-shadow-medium, .box-shadow-medium;
+}
+
 .hand-status{
   position: absolute;
   width: $table-status-size;
@@ -74,6 +87,15 @@
   top: 7rem;
 }
 
+.hand[data-name="dealer"] .hand-busted{
+  top: 6rem;
+  left: -1rem;
+}
+
+.hand[data-name="player"] .hand-busted{
+  top: 8rem;
+}
+
 .hand[data-name="dealer"] .hand-status{
   top: 10rem;
   left: -10.2rem;
@@ -84,3 +106,44 @@
   left: -10.1rem;
 }
 
+// Animations
+
+.anim-busted{
+  animation: busted 0.5s ease-in-out 1;
+}
+
+@keyframes busted{
+
+  0% {
+    transform: scale(2, 2) rotateZ(-45deg);
+    opacity: 0.01;
+  }
+
+  100% {
+    transform: scale(1.0, 1.0) rotateZ(-45deg);
+    opacity: 1;
+  }
+}
+
+.anim-pulsate{
+  animation: pulsate 1s infinite;
+}
+
+@keyframes pulsate{
+
+  0% {
+    transform: scale(1.0, 1.0);
+  }
+
+  50% {
+    transform: scale(1.4, 1.4);
+  }
+
+  100% {
+    transform: scale(1.0, 1.0);
+  }
+}
+
+.anim-pulsate{
+  animation: pulsate 1s infinite;
+}

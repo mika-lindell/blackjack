@@ -27,20 +27,20 @@ class HandComponent extends React.Component {
         >
           {this.props.hand.viewScore}
         </span>
-
-        <span 
-          className="hand-status"
-        >
-          {this.props.hand.score > 21 
-            && 'Busted'}
-          {this.props.hand.name === this.props.winner 
-            && 'Win'}
-          {this.props.winner
-            && this.props.hand.name !== this.props.winner 
-            && this.props.hand.score < 21 
-            && 'Lose'}
-        </span>
-
+        {this.props.hand.name === this.props.winner &&
+          <span 
+            className="hand-status anim-pulsate"
+          >
+            Win
+          </span>
+        }
+        {this.props.hand.score > 21 && 
+          <span 
+            className="hand-busted anim-busted"
+          >
+            Busted
+          </span>
+        }
         {this.props.hand.cards.map((value, key)=>
           <CardComponent key={value.name} card={value} />
         )} 

@@ -46,10 +46,12 @@
   text-shadow: 0rem 0.2rem 1rem $shadow-color-medium;
 }
 
-
-
 .uppercase{
   text-transform: uppercase;
+}
+
+.layer-top{
+  z-index: 99;
 }
 
 .wrapper{

@@ -11,8 +11,7 @@
 }
 
 .card-container + .card-container{
-    margin-left: -8.5rem;
-    transition-delay: 0.3s;
+  margin-left: -8.5rem;
 }
 
 .card{
@@ -44,12 +43,12 @@
   opacity: 1;
 }
 
-.card-anim-flip{
-  animation: card-flip linear 0.3s;
+.anim-flip{
+  animation: flip 0.3s ease-in-out;
   animation-iteration-count: 1;
 }
 
-@keyframes card-flip{
+@-webkit-keyframes flip{
 
   0%{
     transform: rotateY(0deg);
