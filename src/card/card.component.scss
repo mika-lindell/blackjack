@@ -1,48 +1,60 @@
 
 .card-container{
   display: inline-block;
+  position: relative;
+
+  width: $card-width;
+  height: auto;  
+
   margin: 0rem 0.5rem;
   margin-left: -1rem;
 }
 
 .card-container + .card-container{
     margin-left: -8.5rem;
+    transition-delay: 0.3s;
 }
 
 .card{
-  width: 10rem;
+  position: absolute;
+
+  width: $card-width;
   height: auto;
 
-  transition: opacity 300ms ease-in;
+  transition: top 0.3s ease-in, opacity 0.1s ease-in;
 
   @include rounded(0.5rem);
   @include box-shadow(-0.2rem, 0.2rem, 0.5rem, rgba(29, 29, 29, 0.17));
 }
 
-.card + .card{
+// Animations
 
-}
-
-.draw-appear {
+.card-appear {
   opacity: 0.01;
+  top: -40rem;
+
+  position: absolute;
 }
 
-.draw-appear.draw-appear-active {
+.card-appear.card-appear-active {
+  top: 0rem;
+
+  position: absolute;
   opacity: 1;
 }
 
-.draw-enter {
-  opacity: 0.01;
-}
+// .draw-enter {
+//   opacity: 0.01;
+// }
 
-.draw-enter.draw-enter-active {
-  opacity: 1;
-}
+// .draw-enter.draw-enter-active {
+//   opacity: 1;
+// }
 
-.draw-leave {
-  opacity: 1;
-}
+// .draw-leave {
+//   opacity: 1;
+// }
 
-.draw-leave.draw-leave-active {
-  opacity: 0.01;
-}
+// .draw-leave.draw-leave-active {
+//   opacity: 0.01;
+// }

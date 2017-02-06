@@ -97,6 +97,7 @@ class AppComponent extends React.Component {
     if(this.state.gameStatus === 'new') return;
 
     this.dealer.hit('player');
+    // this.dealer.hit2('player', 1, ()=>this.setGameStatus('hit'));
 
     if(this.state.hands.player.score > 21){
       this.stand();

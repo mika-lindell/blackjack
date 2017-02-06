@@ -33,18 +33,69 @@ class Dealer{
     **/
     deal(howMany = 2){
       
-      this.hands.forEach((hand, key) => {
+      this.hands.forEach((hand, name) => {
         hand.clear();
-        this.hit(key, howMany); 
+        this.hit(name, howMany); 
 
+        // TODO: Here player should be able to double if busted on deal
         if(hand.score > 21){
           hand.clear();
-          this.hit(key, howMany)
+          this.hit(name, howMany)
         }
 
       });
 
     }
+
+    // hit2(name, howMany = 1, callback = null){
+
+    //   const hand = this.hands.get(name);
+    //   let i = 0;
+    //   let upsideDown = false;
+
+    //   if(!this.deck.cards || this.deck.cards.length < howMany) 
+    //     this.deck.collectAndShuffle();
+
+
+    //   Array(howMany).fill().forEach( (_, i) => {
+    //     if(name === 'dealer' && i === 1)
+    //       upsideDown = true;
+    //     else
+    //       upsideDown = false;
+
+    //     hand.addCard(this.deck.draw(upsideDown));
+    //   });
+
+    //   hand.calculateScore();
+
+    //   const animate = () => {
+
+    //     setTimeout(() => {
+    //       console.log('loop', i);
+    //       i++;
+
+    //       if(name === 'dealer' && i === 1)
+    //         upsideDown = true;
+    //       else
+    //         upsideDown = false;
+
+    //       hand.addCard(this.deck.draw(upsideDown));
+
+    //       if(callback) callback.apply();
+
+    //       if (i < howMany) {
+    //          animate();
+    //       }   
+
+    //     }, 300);
+
+    //   }
+
+
+
+
+    //   loop();
+    // }
 
     /**
     @method Add card(s) to a hand known by dealer
@@ -55,6 +106,7 @@ class Dealer{
     hit(name, howMany = 1){
 
       const hand = this.hands.get(name);
+      let i = 0;
       let upsideDown = false;
 
       if(!this.deck.cards || this.deck.cards.length < howMany) 

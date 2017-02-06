@@ -13,14 +13,13 @@ class CardComponent extends React.Component {
       <ReactCSSTransitionGroup
         component="div"
         className="card-container"
-        transitionName="draw" 
+        transitionName="card" 
         transitionAppear={true}
-        transitionAppearTimeout={500}
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}
+        transitionAppearTimeout={300}
+        transitionEnter={false}
+        transitionLeave={false}
       >
         <img
-          data-key={this.props.key}  
           src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
           alt={this.props.name}
           className='card' 
