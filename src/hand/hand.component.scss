@@ -5,6 +5,7 @@
   position: absolute;
   width: 22rem;
   height: 22rem;
+  white-space: nowrap;
 }
 
 .hand-score{
@@ -20,6 +21,12 @@
   @extend .font-size-medium, .font-weight-bold, .text-center;
   @include rounded(50%);
 
+}
+
+.hand-status{
+  position: absolute;
+  width: $table-status-size;
+  @extend .font-size-regular, .text-center, .uppercase; 
 }
 
 .hand[data-name="dealer"]{
@@ -41,10 +48,19 @@
 .hand[data-name="dealer"] .hand-score{
   left: -7.5rem;
   top: 4.7rem;
-  white-space: nowrap;
 }
 
 .hand[data-name="player"] .hand-score{
   left: -7.5rem;
   top: 7rem;
+}
+
+.hand[data-name="dealer"] .hand-status{
+  top: 10.5rem;
+  left: -10.2rem;
+}
+
+.hand[data-name="player"] .hand-status{
+  top: 13rem;
+  left: -10.1rem;
 }

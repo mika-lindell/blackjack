@@ -37,8 +37,6 @@ class AppComponent extends React.Component {
           ['KeyD', () => this.stand()]
         ]);
 
-      console.log(actions, e.code, actions.has(e.code));
-
       if(actions.has(e.code)){
         actions.get(e.code).call();
 
@@ -60,14 +58,14 @@ class AppComponent extends React.Component {
         <div
           className="table" 
         >
-          <span>State: {this.state.gameStatus}, Winner: {this.state.winner}</span>
-
           <HandComponent 
             hand={this.state.hands.dealer} 
+            winner={this.state.winner}
           />
 
           <HandComponent 
             hand={this.state.hands.player} 
+            winner={this.state.winner}
           />
         </div>
 
@@ -90,6 +88,7 @@ class AppComponent extends React.Component {
   deal(){
     if(this.state.gameStatus !== 'new') return;
 
+    this.state.winner = null;
     this.dealer.deal();
     this.setGameStatus('deal');
   }

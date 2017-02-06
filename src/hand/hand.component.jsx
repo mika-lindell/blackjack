@@ -22,9 +22,24 @@ class HandComponent extends React.Component {
         >
           {this.props.hand.score}
         </span>
-          {this.props.hand.cards.map((value, key)=>
-            <CardComponent key={key} card={value} />
-          )} 
+
+        {this.props.winner &&
+          <span 
+            className="hand-status"
+          >
+            {this.props.hand.score > 21 
+              && 'Busted'}
+            {this.props.hand.name === this.props.winner 
+              && 'Win'}
+            {this.props.hand.name !== this.props.winner 
+              && this.props.hand.score < 21 
+              && 'Lose'}
+          </span>
+        }
+
+        {this.props.hand.cards.map((value, key)=>
+          <CardComponent key={key} card={value} />
+        )} 
       </div>
     );
 

@@ -55,10 +55,11 @@ button{
   border: none;
 
   color: $text-color;
-  text-transform: uppercase;
 
   padding: 0.5rem 1.5rem; 
   margin: 0.2rem 0.5rem; 
+
+  @extend .uppercase;
 
   &:active,
   &:focus {
@@ -75,7 +76,7 @@ button{
 }
 
 .masthead-base {
-  position: fixed;
+  position: absolute;
   height: $masthead-height;
   line-height: $masthead-height;
   width: 100%;
