@@ -41,6 +41,7 @@
 .hand[data-name="dealer"] .hand-score{
   left: -7.5rem;
   top: 4.7rem;
+  white-space: nowrap;
 }
 
 .hand[data-name="player"] .hand-score{
