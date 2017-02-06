@@ -36,7 +36,6 @@ class Dealer{
       this.hands.forEach((hand, key) => {
         hand.clear();
         this.hit(key, howMany); 
-        hand.calculateScore();
 
         if(hand.score > 21){
           hand.clear();
