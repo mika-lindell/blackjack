@@ -8,7 +8,7 @@ class Card {
     this.card = args.card || null;
     this.isUpsideDown = args.isUpsideDown || false;
     this.numeric = args.numeric || null;
-    this.name = args.svg || null;
+    this.name = args.name || null;
   }
 
 }

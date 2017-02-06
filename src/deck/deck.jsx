@@ -44,7 +44,7 @@ class Deck {
             suit:     suit,
             card:     card, 
             numeric:  cardIndex, 
-            svg:      `${card}_of_${suit}`
+            name:      `${card}_of_${suit}`
           }
         );
       }
