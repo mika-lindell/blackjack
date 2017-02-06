@@ -4,7 +4,6 @@ import CardComponent from '../card/card.component.jsx';
 
 import Card from '../card/card.jsx';
 
-
 class HandComponent extends React.Component {
 
   constructor(props){
@@ -14,10 +13,38 @@ class HandComponent extends React.Component {
   render() {
 
     return (
-      <div>
-      {this.props.hand.cards.map((value, key)=>
-        <CardComponent key={key} card={value} />
-      )} 
+      <div
+        className="hand"
+        data-name={this.props.hand.name}
+      >
+        <span 
+          className="hand-name"
+        >
+          {this.props.hand.name}
+        </span>
+        <span
+          className="hand-score"
+        >
+          {this.props.hand.viewScore}
+        </span>
+        {this.props.hand.name === this.props.winner &&
+          <span 
+            className="hand-status anim-pulsate"
+          >
+            Win
+          </span>
+        }
+        {this.props.hand.score > 21 && 
+          <span 
+            className="hand-busted anim-busted"
+          >
+            Busted
+          </span>
+        }
+        {this.props.hand.cards.map((value, key)=>
+          <CardComponent key={value.name} card={value} />
+        )} 
+
       </div>
     );
 

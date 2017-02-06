@@ -17,8 +17,8 @@ class Dealer{
     @param {Hand} 
     @return {void}
     **/
-    addPlayer(name, hand){
-      this.hands.set(name, hand);
+    addPlayer(hand){
+      this.hands.set(hand.name, hand);
       console.log(this.hands);    
     }
 
@@ -33,15 +33,23 @@ class Dealer{
     **/
     deal(howMany = 2){
       
-      this.hands.forEach((hand, key) => {
-        hand.clear();
-        this.hit(key, howMany); 
-        hand.calculateScore();
+      this.hands.forEach((hand, name) => {
 
-        if(hand.score > 21){
-          hand.clear();
-          this.hit(key, howMany)
+        hand.clear();
+        this.hit(name, howMany); 
+
+        // TODO: Here player should be able to double if busted on deal
+        const canDouble = () => {
+          if(hand.score > 21){
+            hand.clear();
+            this.hit(name, howMany)
+            canDouble();
+            return true;
+          }
+          return false;
         }
+
+        canDouble();
 
       });
 
@@ -56,18 +64,19 @@ class Dealer{
     hit(name, howMany = 1){
 
       const hand = this.hands.get(name);
-      let upsideDown = false;
+      let i = 0;
+      let hidden = false;
 
       if(!this.deck.cards || this.deck.cards.length < howMany) 
         this.deck.collectAndShuffle();
 
-      Array(howMany).fill().forEach( (_, i) => {
+      [...Array(howMany)].forEach( (_, i) => {
         if(name === 'dealer' && i === 1)
-          upsideDown = true;
+          hidden = true;
         else
-          upsideDown = false;
+          hidden = false;
 
-        hand.addCard(this.deck.draw(upsideDown));
+        hand.addCard(this.deck.draw(hidden));
       });
 
       hand.calculateScore();
@@ -83,7 +92,7 @@ class Dealer{
     @param  {string} The name of the hand to be played.
     @return {void}
     **/
-    play(name){
+    play(name, between = null, completed = null){
 
       console.log('play():');
 
@@ -98,6 +107,8 @@ class Dealer{
       this.hands.forEach((b, bKey) => {
         if(a === b) return;
 
+        b.calculateScore();
+
         hitConditions.forEach((value, i) => {
           // If all conditions eval() true, will take another card
           if(eval(value)){ 
@@ -110,10 +121,24 @@ class Dealer{
       });
 
       if(trophies === hitConditions.length){
+        // Take another card
         this.hit(name);
-        this.play(name); // Repeat
+        if(between) between.call();
+
+        setTimeout(() => this.play(name, between, completed), 500);
+      }else{
+        // Done playing
+        if(completed) completed.call();
       }
 
+    }
+
+    flip(name, hidden = false){
+      const hand = this.hands.get(name);
+
+      hand.cards.forEach((card, i) => {
+        card.hidden = hidden;
+      });
     }
 
     /**
@@ -133,6 +158,8 @@ class Dealer{
       let trophies = new Object();
 
       this.hands.forEach((a, aKey) => {
+
+          a.calculateScore();
 
           if(!(trophies[aKey])) trophies[aKey] = 0;
 

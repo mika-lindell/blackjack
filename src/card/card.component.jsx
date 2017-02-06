@@ -1,6 +1,5 @@
 import React from 'react';
-
-import './card.component.scss';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Can we use functional component?
 class CardComponent extends React.Component {
@@ -11,15 +10,35 @@ class CardComponent extends React.Component {
 
   render() {
     return (
-      <img 
-        src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
-        alt={this.props.name} 
+      <ReactCSSTransitionGroup
+        component="div"
+        className="card-container"
+        transitionName="card" 
+        transitionAppear={true}
+        transitionAppearTimeout={300}
+        transitionEnter={false}
+        transitionLeave={false}
+      >
+      { !this.props.hidden && 
+        <img
+          src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
+          alt={this.props.name}
+          className='card' 
         />
+      }
+      { this.props.hidden &&
+        <img
+          src="/public/deck/back.svg" 
+          alt="Backside of a Playing Card"
+          className='card' 
+        /> 
+      }
+      </ReactCSSTransitionGroup>
     );
   }
 
   getCardImageName(card){
-    if(card.isUpsideDown)
+    if(card.hidden)
       return 'back';
     else
       return card.name;
@@ -28,4 +47,3 @@ class CardComponent extends React.Component {
 }
 
 export default CardComponent;
-//{`/public/images/cards.svg#${this.props.svg}`} 

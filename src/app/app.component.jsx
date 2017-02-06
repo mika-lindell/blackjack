@@ -1,13 +1,12 @@
 import React from 'react';
 
 import HandComponent from '../hand/hand.component.jsx';
+import ControlsComponent from '../controls/controls.component.jsx';
+import MastheadComponent from '../masthead/masthead.component.jsx';
 
 import Deck from '../deck/deck.jsx';
 import Dealer from '../dealer/dealer.jsx';
 import Hand from '../hand/hand.jsx';
-
-
-import './app.component.scss';
 
 class AppComponent extends React.Component {
 
@@ -17,8 +16,8 @@ class AppComponent extends React.Component {
     this.state = {
       deck: new Deck(),
       hands: {
-        player: new Hand(),
-        dealer: new Hand()
+        player: new Hand('player'),
+        dealer: new Hand('dealer')
       },
       gameStatus: 'new',
       winner: null
@@ -26,73 +25,107 @@ class AppComponent extends React.Component {
 
     this.dealer = new Dealer();
     this.dealer.setDeck(this.state.deck);
-    this.dealer.addPlayer('player', this.state.hands.player);
-    this.dealer.addPlayer('dealer', this.state.hands.dealer);
+    this.dealer.addPlayer(this.state.hands.player);
+    this.dealer.addPlayer(this.state.hands.dealer);
 
+    // Declare the method here so we can keep the scope with () =>, and remove the event listener on unmount
+    this.handleKeyPress = (e) => {
+
+      const actions = new Map([
+          ['KeyA', () => this.deal()],
+          ['KeyS', () => this.hit()],
+          ['KeyD', () => this.stand()]
+        ]);
+
+      if(actions.has(e.code)){
+        actions.get(e.code).call();
+
+      } 
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress);
   }
 
   render() {
 
     return (
       <div>
-        <span>State: {this.state.gameStatus}, Winner: {this.state.winner}</span>
-        <h2>
-          Dealer <span>{this.state.hands.dealer.score}</span>
-        </h2>
-        <HandComponent hand={this.state.hands.dealer} />
 
-        <h2>
-          Player <span>{this.state.hands.player.score}</span>
-        </h2>
-        <HandComponent hand={this.state.hands.player} />
+        <MastheadComponent />
 
-        <button 
-          onClick={()=>this.deal()} 
-          disabled={this.state.gameStatus !== 'new'}
-          >
-            Deal
-        </button>
-        <button 
-          onClick={()=>this.hit()}
-          disabled={this.state.gameStatus === 'new'}
-          >
-            Hit
-        </button>
-        <button 
-          onClick={()=>this.stand()} 
-          disabled={this.state.gameStatus === 'new'}
-          >
-            Stand
-        </button>
+        <div
+          className="table" 
+        >
+          <HandComponent 
+            hand={this.state.hands.dealer} 
+            winner={this.state.winner}
+          />
+
+          <HandComponent 
+            hand={this.state.hands.player} 
+            winner={this.state.winner}
+          />
+        </div>
+
+        <ControlsComponent 
+          deal={() => this.deal()} 
+          hit={() => this.hit()} 
+          stand={() => this.stand()} 
+          gameStatus={this.state.gameStatus}
+        />
 
       </div>
     );
   }
 
+  componentWillUnmount(){
+    document.removeEventListener('keypress', this.handleKeyPress);
+  }
 
   deal(){
+    if(this.state.gameStatus !== 'new') return;
+
+    this.state.winner = null;
     this.dealer.deal();
     this.setGameStatus('deal');
   }
 
   hit(){
+    if(this.state.gameStatus === 'new') return;
+
     this.dealer.hit('player');
 
     if(this.state.hands.player.score > 21){
-      this.state.winner = this.dealer.calculateWinner();
-      this.setGameStatus('new');
+      this.stand();
     }else{
       this.setGameStatus('hit');
     }
-
   }
 
   stand(){
+    if(this.state.gameStatus === 'new') return;
+
     this.dealer.stand();
     this.setGameStatus('stand');
-    this.dealer.play('dealer');
-    this.state.winner = this.dealer.calculateWinner();
-    this.setGameStatus('new');
+
+    setTimeout(()=>{
+
+      this.dealer.flip('dealer');
+
+      const between = ()=> {
+        this.setGameStatus('new');
+      }
+
+      const completed = ()=> {
+        this.state.winner = this.dealer.calculateWinner();  
+        this.setGameStatus('new');    
+      }
+
+      this.dealer.play('dealer', ()=> between(), ()=> completed());
+
+    }, 200);
   }  
 
   setGameStatus(status){
@@ -100,7 +133,6 @@ class AppComponent extends React.Component {
       gameStatus: status      
     })
   }
-
 }
 
 export default AppComponent;

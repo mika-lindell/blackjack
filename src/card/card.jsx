@@ -6,9 +6,9 @@ class Card {
   constructor(args = {}){
     this.suit = args.suit || null;
     this.card = args.card || null;
-    this.isUpsideDown = args.isUpsideDown || false;
+    this.hidden = args.hidden || false;
     this.numeric = args.numeric || null;
-    this.name = args.svg || null;
+    this.name = args.name || null;
   }
 
 }

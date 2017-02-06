@@ -1,0 +1,149 @@
+
+
+.hand{
+  display: inline-block;
+  position: absolute;
+  width: 22rem;
+  height: 22rem;
+  white-space: nowrap;
+}
+
+
+.hand-name{
+  position: absolute;
+  width: $table-status-size;
+    
+  @extend .font-size-regular, .text-center, .uppercase, .text-shadow-medium; 
+}
+
+
+.hand-score{
+  display: block;
+  position: fixed;
+
+  border: 0.3rem solid;
+
+  line-height:  $table-score-size * 0.8;
+  width: $table-score-size;
+  height: $table-score-size;
+
+  @extend .font-size-medium, .font-weight-bold, .text-center, .box-shadow-medium;
+  @include rounded(50%);
+
+}
+
+.hand-busted{
+  position: absolute;
+
+  color: $busted-color;
+  border: 0.3rem solid  $busted-color;
+  padding: 0rem 0.5rem;  
+
+  transform: rotateZ(-45deg);
+  transition: all 0.3s ease-in;
+
+  @extend .layer-top, .font-size-large, .uppercase, .text-shadow-medium, .box-shadow-medium;
+}
+
+.hand-status{
+  position: absolute;
+  width: $table-status-size;
+
+  @extend .font-size-regular, .text-center, .uppercase, .text-shadow-medium; 
+}
+
+.hand[data-name="dealer"]{
+  right: -5rem;
+  top: 0rem;
+  transform: rotateZ(20deg);
+}
+
+.hand[data-name="player"]{
+  padding-top: 2.5rem;
+  bottom: 1rem;
+  left: 6rem;
+  transform: rotateZ(-5deg);
+  border: 1rem solid $table-texture-print-color;
+
+  @include rounded(50%);
+}
+
+.hand[data-name="dealer"] .hand-name{
+  top: -1.5rem;
+}
+
+.hand[data-name="player"] .hand-name{
+  top: 1rem;
+  left: 4.6rem;
+}
+
+.hand[data-name="dealer"] .hand-score{
+  left: -7.5rem;
+  top: 4.7rem;
+}
+
+.hand[data-name="player"] .hand-score{
+  left: -7.5rem;
+  top: 7rem;
+}
+
+.hand[data-name="dealer"] .hand-busted{
+  top: 6rem;
+  left: -1rem;
+}
+
+.hand[data-name="player"] .hand-busted{
+  top: 8rem;
+}
+
+.hand[data-name="dealer"] .hand-status{
+  top: 10rem;
+  left: -10.2rem;
+}
+
+.hand[data-name="player"] .hand-status{
+  top: 12.4rem;
+  left: -10.1rem;
+}
+
+// Animations
+
+.anim-busted{
+  animation: busted 0.5s ease-in-out 1;
+}
+
+@keyframes busted{
+
+  0% {
+    transform: scale(2, 2) rotateZ(-45deg);
+    opacity: 0.01;
+  }
+
+  100% {
+    transform: scale(1.0, 1.0) rotateZ(-45deg);
+    opacity: 1;
+  }
+}
+
+.anim-pulsate{
+  animation: pulsate 1s infinite;
+}
+
+@keyframes pulsate{
+
+  0% {
+    transform: scale(1.0, 1.0);
+  }
+
+  50% {
+    transform: scale(1.4, 1.4);
+  }
+
+  100% {
+    transform: scale(1.0, 1.0);
+  }
+}
+
+.anim-pulsate{
+  animation: pulsate 1s infinite;
+}

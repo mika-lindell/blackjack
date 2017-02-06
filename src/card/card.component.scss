@@ -1,3 +1,62 @@
-button{
-  color: blue;
+
+.card-container{
+  display: inline-block;
+  position: relative;
+
+  width: $card-width;
+  height: auto;  
+
+  margin: 0rem 0.5rem;
+  margin-left: -1rem;
+}
+
+.card-container + .card-container{
+  margin-left: -8.5rem;
+}
+
+.card{
+  position: absolute;
+
+  width: $card-width;
+  height: auto;
+
+  transition: top 0.3s ease-in, opacity 0.1s ease-in;
+
+  @include rounded(0.5rem);
+  @extend .box-shadow-light; 
+
+}
+
+// Animations
+
+.card-appear {
+  opacity: 0.01;
+  top: -40rem;
+
+  position: absolute;
+}
+
+.card-appear.card-appear-active {
+  top: 0rem;
+
+  position: absolute;
+  opacity: 1;
+}
+
+.anim-flip{
+  animation: flip 0.3s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+@-webkit-keyframes flip{
+
+  0%{
+    transform: rotateY(0deg);
+  }
+
+  100%{
+    transform: rotateY(90deg);
+  }
+
+
 }

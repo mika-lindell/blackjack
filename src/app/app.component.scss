@@ -1,4 +1,19 @@
-p{
-  color: red;
-  background-color: green;
+#app{
+  @include box-shadow(0, 0, 40rem, rgba(0, 0, 0, 0.59), true); // Vignette-effect
+}
+.table{
+
+  // Camera angle
+  transform: rotateX($camera-angle);
+
+  width: $layout-max-width;  
+  height: $layout-max-height;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -($layout-max-height / 2);
+  margin-left: -($layout-max-height / 2);
+
+
 }
