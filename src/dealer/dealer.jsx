@@ -98,6 +98,8 @@ class Dealer{
       this.hands.forEach((b, bKey) => {
         if(a === b) return;
 
+        b.calculateScore();
+
         hitConditions.forEach((value, i) => {
           // If all conditions eval() true, will take another card
           if(eval(value)){ 

@@ -18,19 +18,31 @@ class ControlsComponent extends React.Component {
             onClick={() => this.props.deal()} 
             disabled={this.props.gameStatus !== 'new'}
             >
-              Deal
+              Deal <span
+                className="shortcut-key"
+              >
+              (A)
+              </span>
           </button>
           <button 
             onClick={() => this.props.hit()}
             disabled={this.props.gameStatus === 'new'}
             >
-              Hit
+              Hit <span
+                className="shortcut-key"
+              >
+              (S)
+              </span>
           </button>
           <button 
             onClick={() => this.props.stand()} 
             disabled={this.props.gameStatus === 'new'}
             >
-              Stand
+              Stand <span
+                className="shortcut-key"
+              >
+              (D)
+              </span>
           </button>
         </div>        
       </div>

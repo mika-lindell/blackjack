@@ -28,6 +28,26 @@ class AppComponent extends React.Component {
     this.dealer.addPlayer(this.state.hands.player);
     this.dealer.addPlayer(this.state.hands.dealer);
 
+    // Declare the method here so we can keep the scope with () =>, and remove the event listener on unmount
+    this.handleKeyPress = (e) => {
+
+      const actions = new Map([
+          ['KeyA', () => this.deal()],
+          ['KeyS', () => this.hit()],
+          ['KeyD', () => this.stand()]
+        ]);
+
+      console.log(actions, e.code, actions.has(e.code));
+
+      if(actions.has(e.code)){
+        actions.get(e.code).call();
+
+      } 
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress);
   }
 
   render() {
@@ -62,13 +82,21 @@ class AppComponent extends React.Component {
     );
   }
 
+  componentWillUnmount(){
+    document.removeEventListener('keypress', this.handleKeyPress);
+  }
+
 
   deal(){
+    if(this.state.gameStatus !== 'new') return;
+
     this.dealer.deal();
     this.setGameStatus('deal');
   }
 
   hit(){
+    if(this.state.gameStatus === 'new') return;
+
     this.dealer.hit('player');
 
     if(this.state.hands.player.score > 21){
@@ -80,6 +108,7 @@ class AppComponent extends React.Component {
   }
 
   stand(){
+    if(this.state.gameStatus === 'new') return;
     this.dealer.stand();
     this.setGameStatus('stand');
     this.dealer.flip('dealer');
@@ -93,7 +122,6 @@ class AppComponent extends React.Component {
       gameStatus: status      
     })
   }
-
 }
 
 export default AppComponent;
