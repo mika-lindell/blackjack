@@ -2,13 +2,11 @@ import React from 'react';
 
 import HandComponent from '../hand/hand.component.jsx';
 import ControlsComponent from '../controls/controls.component.jsx';
+import MastheadComponent from '../masthead/masthead.component.jsx';
 
 import Deck from '../deck/deck.jsx';
 import Dealer from '../dealer/dealer.jsx';
 import Hand from '../hand/hand.jsx';
-
-
-import './app.component.scss';
 
 class AppComponent extends React.Component {
 
@@ -35,18 +33,23 @@ class AppComponent extends React.Component {
   render() {
 
     return (
-      <div
-        className="table" 
-      >
-        <span>State: {this.state.gameStatus}, Winner: {this.state.winner}</span>
+      <div>
 
-        <HandComponent 
-          hand={this.state.hands.dealer} 
-        />
+        <MastheadComponent />
 
-        <HandComponent 
-          hand={this.state.hands.player} 
-        />
+        <div
+          className="table" 
+        >
+          <span>State: {this.state.gameStatus}, Winner: {this.state.winner}</span>
+
+          <HandComponent 
+            hand={this.state.hands.dealer} 
+          />
+
+          <HandComponent 
+            hand={this.state.hands.player} 
+          />
+        </div>
 
         <ControlsComponent 
           deal={() => this.deal()} 

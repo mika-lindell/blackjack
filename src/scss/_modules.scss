@@ -1,0 +1,28 @@
+.font-heading{
+  font-family: 'Rio Grande', serif;
+}
+
+.font-regular{
+  font-family: 'Bree Serif', serif;
+}
+
+.font-size-regular{
+  font-size: 1rem;
+}
+
+.font-size-medium{
+  font-size: 1.5rem;
+}
+
+.font-size-large{
+  font-size: 3.5rem;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.wrapper{
+  width: $layout-max-width;
+  margin: 0 auto;
+}

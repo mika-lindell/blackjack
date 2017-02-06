@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './controls.component.scss';
-
 class ControlsComponent extends React.Component {
 
   constructor(props) {
@@ -13,24 +11,28 @@ class ControlsComponent extends React.Component {
       <div 
         className="controls"
       >
-        <button 
-          onClick={() => this.props.deal()} 
-          disabled={this.props.gameStatus !== 'new'}
-          >
-            Deal
-        </button>
-        <button 
-          onClick={() => this.props.hit()}
-          disabled={this.props.gameStatus === 'new'}
-          >
-            Hit
-        </button>
-        <button 
-          onClick={() => this.props.stand()} 
-          disabled={this.props.gameStatus === 'new'}
-          >
-            Stand
-        </button>        
+        <div
+          className="controls-container"
+        >
+          <button 
+            onClick={() => this.props.deal()} 
+            disabled={this.props.gameStatus !== 'new'}
+            >
+              Deal
+          </button>
+          <button 
+            onClick={() => this.props.hit()}
+            disabled={this.props.gameStatus === 'new'}
+            >
+              Hit
+          </button>
+          <button 
+            onClick={() => this.props.stand()} 
+            disabled={this.props.gameStatus === 'new'}
+            >
+              Stand
+          </button>
+        </div>        
       </div>
     );
   }

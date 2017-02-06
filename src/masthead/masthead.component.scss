@@ -1,0 +1,12 @@
+.masthead {
+
+  top: 0rem;
+  border-bottom-width: $masthead-border-width;
+  padding: 0 1rem;
+
+  @extend .masthead-base;
+}
+
+.logo{
+  @extend .font-heading, .font-size-large, .text-center; 
+}

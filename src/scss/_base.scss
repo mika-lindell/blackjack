@@ -1,0 +1,70 @@
+
+html, 
+body, 
+#app{
+
+  width: 100%;  
+  height: 100%;
+
+}
+
+body{  
+
+  margin: 0;
+
+  min-width: $layout-max-width;  
+  min-height: $layout-max-height;
+
+  color: $text-color;
+
+  overflow: hidden;
+
+  background-color: $canvas;
+
+  // Camera perspective
+  perspective: $camera-distance;
+  -webkit-perspective: $camera-distance;
+  -moz-perspective: $camera-distance;
+
+  // &:before{
+  //   content: '';
+  //   position: absolute;
+  //   top: -50%;
+  //   left: -50%;
+  //   height: 200%;
+  //   width: 200%;
+  //   background-image: $table-texture;
+  //   background-position: 50% 50%;
+  //   background-repeat: no-repeat;
+  //   background-size: cover;    
+  //    transform: rotateX($camera-angle);
+  // }
+
+}
+
+h1{
+  margin: 0;
+}
+
+button{
+  background: none;
+  border: none;
+
+  color: $text-color;
+  text-transform: uppercase;
+
+  padding: 0.5rem 1.5rem; 
+  margin: 0.2rem 0.5rem; 
+}
+
+.masthead-base {
+  position: fixed;
+  height: $masthead-height;
+  line-height: $masthead-height;
+  width: 100%;
+
+  border-width: 0px;
+  border-style: solid;
+  border-color: $masthead-color-primary;
+
+}

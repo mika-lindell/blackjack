@@ -1,48 +1,7 @@
-@import '../scss/vars';
-
-html, 
-body, 
-#app{
-
-  width: 100%;  
-  height: 100%;
-
-}
-
-body{  
-
-  min-width: $layout-max-width;  
-  min-height: $layout-max-height;
-
-  overflow: hidden;
-
-  background-color: $canvas;
-
-  // Camera perspective
-  perspective: $camera-distance;
-  -webkit-perspective: $camera-distance;
-  -moz-perspective: $camera-distance;
-}
-
-#app{
-
-  width: 200%;
-  height: 200%;
-  position: absolute;
-  left: -50%;
-  top: -50%;
-
-  background-image: $table-texture;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
+.table{
 
   // Camera angle
   transform: rotateX($camera-angle);
-  
-}
-
-.table{
 
   width: $layout-max-width;  
   height: $layout-max-height;
@@ -52,4 +11,6 @@ body{
   left: 50%;
   margin-top: -($layout-max-height / 2);
   margin-left: -($layout-max-height / 2);
+
+
 }
