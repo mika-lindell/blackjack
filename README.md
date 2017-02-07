@@ -1,4 +1,4 @@
-#A game of BlackJack made as ReactJs exercise. 
+#A game of BlackJack with React
 
 **Live demo of current build:**
 [http://scribe-panda-48744.bitballoon.com/]
