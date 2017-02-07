@@ -21,7 +21,7 @@ class CardComponent extends React.Component {
       >
       { !this.props.hidden && 
         <img
-          src={`/public/deck/${this.getCardImageName(this.props.card)}.svg`} 
+          src={this.props.card.image} 
           alt={this.props.name}
           className='card' 
         />
@@ -35,13 +35,6 @@ class CardComponent extends React.Component {
       }
       </ReactCSSTransitionGroup>
     );
-  }
-
-  getCardImageName(card){
-    if(card.hidden)
-      return 'back';
-    else
-      return card.name;
   }
 
 }

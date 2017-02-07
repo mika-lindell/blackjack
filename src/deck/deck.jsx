@@ -44,13 +44,24 @@ class Deck {
             suit:     suit,
             card:     card, 
             numeric:  cardIndex, 
-            name:      `${card}_of_${suit}`
+            name:     `${card}_of_${suit}`,
+            image:    `/public/deck/${card}_of_${suit}.svg`
           }
         );
       }
 
     );
 
+  }
+
+  getCardImagePaths(){
+
+    if(!this.cards) this.generate();
+    let names = this.cards.map((_, i) => {
+      return this.cards[i].image;
+    });
+
+    return names;
   }
 
   /**

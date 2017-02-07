@@ -33,6 +33,7 @@ class AppComponent extends React.Component {
   componentWillMount(){
 
     this.dealer.setDeck(this.state.deck);
+    this.preload = this.state.deck.getCardImagePaths();
     this.dealer.addPlayer(this.state.hands.player);
     this.dealer.addPlayer(this.state.hands.dealer);
 
@@ -104,7 +105,7 @@ class AppComponent extends React.Component {
               stand={() => this.stand()} 
               gameStatus={this.state.gameStatus}
             />
-            
+
           </main>
       </Preload>
     );
