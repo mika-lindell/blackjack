@@ -1,4 +1,5 @@
 import React from 'react';
+import Preload from 'react-preload';
 
 import HandComponent from '../hand/hand.component.jsx';
 import ControlsComponent from '../controls/controls.component.jsx';
@@ -24,9 +25,20 @@ class AppComponent extends React.Component {
     };
 
     this.dealer = new Dealer();
+    this.preload = new Array();
+
+
+  }
+
+  componentWillMount(){
+
     this.dealer.setDeck(this.state.deck);
     this.dealer.addPlayer(this.state.hands.player);
     this.dealer.addPlayer(this.state.hands.dealer);
+
+  }
+
+  componentDidMount() {
 
     // Declare the method here so we can keep the scope with () =>, and remove the event listener on unmount
     this.handleKeyPress = (e) => {
@@ -42,41 +54,59 @@ class AppComponent extends React.Component {
 
       } 
     }
-  }
 
-  componentDidMount() {
     document.addEventListener('keypress', this.handleKeyPress);
+
   }
 
   render() {
 
+    const loadingIndicator = (
+      <p className="loader">
+        <span className="logo">
+          ( BlackJack )
+        </span>
+        <br />
+        <span className="loader-indicator">
+          Loading...
+        </span>
+      </p>
+      )
+
     return (
-      <div>
-
-        <MastheadComponent />
-
-        <div
-          className="table" 
+      <Preload
+        loadingIndicator={loadingIndicator}
+        images={this.preload}
+        resolveOnError={true}
+        mountChildren={true}
         >
-          <HandComponent 
-            hand={this.state.hands.dealer} 
-            winner={this.state.winner}
-          />
+          <main>
 
-          <HandComponent 
-            hand={this.state.hands.player} 
-            winner={this.state.winner}
-          />
-        </div>
+            <MastheadComponent />
 
-        <ControlsComponent 
-          deal={() => this.deal()} 
-          hit={() => this.hit()} 
-          stand={() => this.stand()} 
-          gameStatus={this.state.gameStatus}
-        />
+            <div
+              className="table" 
+            >
+              <HandComponent 
+                hand={this.state.hands.dealer} 
+                winner={this.state.winner}
+              />
 
-      </div>
+              <HandComponent 
+                hand={this.state.hands.player} 
+                winner={this.state.winner}
+              />
+            </div>
+
+            <ControlsComponent 
+              deal={() => this.deal()} 
+              hit={() => this.hit()} 
+              stand={() => this.stand()} 
+              gameStatus={this.state.gameStatus}
+            />
+            
+          </main>
+      </Preload>
     );
   }
 

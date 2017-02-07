@@ -1,6 +1,24 @@
 #app{
   @include box-shadow(0, 0, 40rem, rgba(0, 0, 0, 0.59), true); // Vignette-effect
 }
+
+.loader{
+
+  position: absolute;
+  top: 50%;
+  width: 100%;
+
+  margin-top: -2rem;
+
+  height: 4rem;
+
+  @extend .text-center;
+}
+
+.loader-indicator{
+  @extend .font-size-regular, .uppercase, .anim-loader;
+}
+
 .table{
 
   // Camera angle
@@ -16,4 +34,26 @@
   margin-left: -($layout-max-height / 2);
 
 
+}
+
+
+// Animations
+
+@keyframes loader{
+
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.anim-loader{
+  animation: loader 2s ease-in-out infinite;
 }

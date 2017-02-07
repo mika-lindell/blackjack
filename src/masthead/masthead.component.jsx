@@ -8,7 +8,7 @@ class MastheadComponent extends React.Component {
 
   render() {
     return (
-      <div 
+      <header 
         className="masthead"
       >
         <div
@@ -20,7 +20,7 @@ class MastheadComponent extends React.Component {
               ( BlackJack )
           </h1>
         </div>        
-      </div>
+      </header>
     );
   }
 

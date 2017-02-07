@@ -29,14 +29,14 @@ class HandComponent extends React.Component {
         </span>
         {this.props.hand.name === this.props.winner &&
           <span 
-            className="hand-status anim-pulsate"
+            className="hand-status"
           >
             Win
           </span>
         }
         {this.props.hand.score > 21 && 
           <span 
-            className="hand-busted anim-busted"
+            className="hand-busted"
           >
             Busted
           </span>
