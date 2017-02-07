@@ -2,6 +2,7 @@
 
 **Live demo of current build:**
 [http://scribe-panda-48744.bitballoon.com/]
+Modern browsers only
 
 **To install:**
 ```
