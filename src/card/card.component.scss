@@ -56,21 +56,3 @@
 .card-leave.card-leave-active {
   transform: rotateY(90deg);
 }
-
-
-.anim-flip{
-  animation: flip 0.3s ease-in-out 1;
-}
-
-@-webkit-keyframes flip{
-
-  0%{
-    transform: rotateY(0deg);
-  }
-
-  100%{
-    transform: rotateY(90deg);
-  }
-
-
-}
