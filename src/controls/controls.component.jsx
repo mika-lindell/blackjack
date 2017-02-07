@@ -8,7 +8,7 @@ class ControlsComponent extends React.Component {
 
   render() {
     return (
-      <div 
+      <footer 
         className="controls"
       >
         <div
@@ -45,7 +45,7 @@ class ControlsComponent extends React.Component {
               </span>
           </button>
         </div>        
-      </div>
+      </footer>
     );
   }
 

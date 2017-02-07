@@ -43,13 +43,15 @@
   transition: all 0.3s ease-in;
 
   @extend .layer-top, .font-size-large, .uppercase, .text-shadow-medium, .box-shadow-medium;
+  @extend .anim-busted;
 }
 
 .hand-status{
   position: absolute;
   width: $table-status-size;
 
-  @extend .font-size-regular, .text-center, .uppercase, .text-shadow-medium; 
+  @extend .font-size-regular, .text-center, .uppercase, .text-shadow-medium;
+  @extend .anim-pulsate; 
 }
 
 .hand[data-name="dealer"]{
@@ -89,11 +91,12 @@
 
 .hand[data-name="dealer"] .hand-busted{
   top: 6rem;
-  left: -1rem;
+  left: -7rem;
 }
 
 .hand[data-name="player"] .hand-busted{
   top: 8rem;
+  left: -7.2rem;
 }
 
 .hand[data-name="dealer"] .hand-status{
@@ -123,10 +126,6 @@
     transform: scale(1.0, 1.0) rotateZ(-45deg);
     opacity: 1;
   }
-}
-
-.anim-pulsate{
-  animation: pulsate 1s infinite;
 }
 
 @keyframes pulsate{

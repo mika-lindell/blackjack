@@ -9,6 +9,7 @@ class Card {
     this.hidden = args.hidden || false;
     this.numeric = args.numeric || null;
     this.name = args.name || null;
+    this.image = args.image || null;
   }
 
 }
