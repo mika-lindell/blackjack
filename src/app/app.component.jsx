@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Preload from 'react-preload';
 
 import HandComponent from '../hand/hand.component.jsx';
@@ -81,6 +82,14 @@ class AppComponent extends React.Component {
         resolveOnError={true}
         mountChildren={true}
         >
+          <ReactCSSTransitionGroup
+            component="div"
+            transitionName="app" 
+            transitionAppear={true}
+            transitionAppearTimeout={300}
+            transitionEnter={false}
+            transitionLeave={false}
+          >
           <main>
 
             <MastheadComponent />
@@ -107,6 +116,7 @@ class AppComponent extends React.Component {
             />
 
           </main>
+          </ReactCSSTransitionGroup>
       </Preload>
     );
   }
