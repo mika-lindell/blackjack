@@ -1,4 +1,7 @@
-# Blackjack made with React
+#A game of BlackJack with React
+
+**Live demo of current build:**
+[http://scribe-panda-48744.bitballoon.com/]
 
 **To install:**
 ```

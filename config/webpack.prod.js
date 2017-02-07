@@ -11,7 +11,7 @@ module.exports = webpackMerge(commonConfig, {
 
   output: {
     path: helpers.root('dist'),
-    publicPath: helpers.root('dist'), // This needs to be the url or path to your assets or cdn
+    publicPath: 'http://scribe-panda-48744.bitballoon.com/public/', // This needs to be the url or path to your assets or cdn
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].chunk.js'
   },

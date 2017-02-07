@@ -1,0 +1,86 @@
+*{
+  box-sizing: border-box;
+}
+
+
+html, 
+body, 
+#app{
+
+  width: 100%;  
+  height: 100%;
+
+}
+
+body{  
+
+  margin: 0;
+
+  min-width: $layout-max-width;  
+  min-height: $layout-max-height;
+
+  color: $text-color;
+
+  overflow: hidden;
+
+  background-color: $canvas;
+
+  // Camera perspective
+  perspective: $camera-distance;
+  -webkit-perspective: $camera-distance;
+  -moz-perspective: $camera-distance;
+
+  @extend .font-regular;
+}
+
+h1{
+  margin: 0;
+}
+
+button{
+  background: none;
+  border: none;
+
+  color: $text-color;
+
+  padding: 0.5rem 1.5rem; 
+  margin: 0.2rem 0.5rem; 
+
+  transition: transform 0.1s;
+
+  @extend .uppercase;
+
+  &:hover{
+    transform: scale(1.2, 1.2);
+  }
+
+  &:hover:disabled{
+    transform: scale(1.0, 1.0);
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:active{
+    transform: translateY(0.1rem);
+  }
+
+  &:disabled{
+    opacity: 0.5;
+  }
+}
+
+.masthead-base {
+  position: absolute;
+  height: $masthead-height;
+  line-height: $masthead-height;
+  width: 100%;
+
+  border-width: 0px;
+  border-style: solid;
+  border-color: $masthead-color-primary;
+
+  @extend .layer-top;
+}

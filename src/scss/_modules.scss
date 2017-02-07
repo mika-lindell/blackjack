@@ -1,0 +1,60 @@
+.font-heading{
+  font-family: 'Rio Grande', serif;
+}
+
+.font-regular{
+  font-family: 'Bree Serif', serif;
+}
+
+.font-size-small{
+  font-size: 1rem;
+}
+
+.font-size-regular{
+  font-size: 1.5rem;
+}
+
+.font-size-medium{
+  font-size: 2.5rem;
+}
+
+.font-size-large{
+  font-size: 3.5rem;
+}
+
+.font-weight-regular{
+  font-weight: 400;
+}
+
+.font-weight-bold{
+  font-weight: 800;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.box-shadow-light{
+   @include box-shadow(-0.2rem, 0.2rem, 0.5rem, $shadow-color-light);
+} 
+
+.box-shadow-medium{
+   @include box-shadow(0rem, 0.2rem, 1rem, $shadow-color-medium);
+} 
+
+.text-shadow-medium{
+  text-shadow: 0rem 0.2rem 1rem $shadow-color-medium;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.layer-top{
+  z-index: 99;
+}
+
+.wrapper{
+  width: $layout-max-width;
+  margin: 0 auto;
+}

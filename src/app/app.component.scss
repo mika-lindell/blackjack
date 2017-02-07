@@ -1,4 +1,105 @@
-p{
-  color: red;
-  background-color: green;
+#app{
+  @include box-shadow(0, 0, 40rem, rgba(0, 0, 0, 0.59), true); // Vignette-effect
+}
+
+.loader{
+
+  position: absolute;
+  top: 50%;
+  width: 100%;
+
+  margin-top: -2rem;
+
+  height: 4rem;
+
+  @extend .text-center, .anim-fade-in;
+}
+
+.loader-indicator{
+  @extend .font-size-regular, .uppercase, .anim-loader;
+}
+
+.table{
+
+  transform: rotateX($camera-angle);
+
+  transition: transform 0.3s;
+
+  width: $layout-max-width;  
+  height: $layout-max-height;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -($layout-max-height / 2);
+  margin-left: -($layout-max-height / 2);
+
+  @extend .anim-camera;
+
+}
+
+
+// Animations
+
+.app-appear {
+  transition: opacity 0.3s ease-in;
+  opacity: 0.01;
+}
+
+.app-appear.app-appear-active {
+  opacity: 1;
+}
+
+  
+
+
+@keyframes camera{
+
+  0% {
+    opacity: 0;
+    transform: rotateX(0deg) translateY(-4rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateX($camera-angle);
+  }
+}
+
+.anim-camera{
+  animation: camera 1s ease-in-out 1;
+}
+
+@keyframes loader{
+
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.anim-loader{
+  animation: loader 2s ease-in-out infinite;
+}
+
+@keyframes fade-in{
+
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.anim-fade-in{
+  animation: fade-in 0.3s ease-in-out 1;
 }

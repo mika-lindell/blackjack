@@ -1,0 +1,26 @@
+.controls{
+
+  bottom: 0rem;
+  border-top-width: $masthead-border-width;
+
+  @extend .masthead-base;
+}
+
+.controls-container{
+
+  @extend .wrapper, .text-center;
+
+  button{
+    height: $masthead-height;
+    margin: 0 1.5rem;
+    @extend .font-regular, .font-size-regular;
+  }
+
+}
+
+.shortcut-key{
+  opacity: 0.9;
+
+  @extend .font-size-small;
+}
+

@@ -1,0 +1,32 @@
+/**
+VARIABLES
+**/
+
+// Theme
+$canvas: #265c33;
+
+$text-color: #cdbe91;
+$busted-color: #da2c2f;
+$shadow-color-light: rgba(29, 29, 29, 0.17);
+$shadow-color-medium: rgba(29, 29, 29, 0.57);
+
+$masthead-color-primary: $text-color;
+$masthead-border-width: 0.01rem;
+
+$table-texture: url('../../public/theme/board.jpg');
+$table-texture-print-color: rgba(205, 190, 145, 0.5);
+
+$table-score-size: 5rem;
+$table-status-size: 10rem;
+
+$card-width: 10rem;
+
+// Camera
+$camera-distance: 60rem;
+$camera-angle: 20deg;
+
+// Layout
+$layout-max-width: 40rem;
+$layout-max-height: 40rem;
+
+$masthead-height: 5rem;
