@@ -16,17 +16,17 @@ class CardComponent extends React.Component {
         transitionName="card" 
         transitionAppear={true}
         transitionAppearTimeout={300}
-        transitionEnter={false}
-        transitionLeave={false}
+        transitionEnterTimeout={400}
+        transitionLeaveTimeout={300}
       >
-      { !this.props.hidden && 
+      { !this.props.card.hidden && 
         <img
           src={this.props.card.image} 
-          alt={this.props.name}
+          alt={this.props.card.name} 
           className='card' 
         />
       }
-      { this.props.hidden &&
+      { this.props.card.hidden &&
         <img
           src="/public/deck/back.svg" 
           alt="Backside of a Playing Card"
