@@ -162,6 +162,7 @@ class AppComponent extends React.Component {
     setTimeout(()=>{
 
       this.dealer.flip('dealer');
+      this.state.hands.dealer.calculateScore();
       this.setGameStatus('stand');
 
       setTimeout(()=>{
