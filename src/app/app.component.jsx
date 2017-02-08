@@ -131,42 +131,54 @@ class AppComponent extends React.Component {
     this.state.winner = null;
     this.dealer.deal();
     this.setGameStatus('deal');
+
+    if(this.state.hands.player.score == 21) this.stand(true);
   }
 
   hit(){
-    if(this.state.gameStatus === 'new') return;
+    if(this.state.gameStatus === 'new' || this.state.gameStatus === 'stand') return;
 
     this.dealer.hit('player');
 
-    if(this.state.hands.player.score > 21){
+    if(this.state.hands.player.score > 21 
+      || this.state.hands.player.score == 21 ){
       this.stand();
     }else{
       this.setGameStatus('hit');
     }
   }
 
-  stand(){
-    if(this.state.gameStatus === 'new') return;
+  stand(force = false){
+
+    const flipDelay = 600;
+    const dealDelay = 600;
+
+    if(this.state.gameStatus === 'new' || this.state.gameStatus === 'stand' && !force) return;
 
     this.dealer.stand();
     this.setGameStatus('stand');
 
+    // Need a bit of delay for player to catch what's happening
     setTimeout(()=>{
 
       this.dealer.flip('dealer');
+      this.setGameStatus('stand');
 
-      const between = ()=> {
-        this.setGameStatus('new');
-      }
+      setTimeout(()=>{
 
-      const completed = ()=> {
-        this.state.winner = this.dealer.calculateWinner();  
-        this.setGameStatus('new');    
-      }
+        const between = ()=> {
+          this.setGameStatus('stand');
+        }
 
-      this.dealer.play('dealer', ()=> between(), ()=> completed());
+        const completed = ()=> {
+          this.state.winner = this.dealer.calculateWinner();  
+          this.setGameStatus('new');    
+        }
 
-    }, 200);
+        this.dealer.play('dealer', ()=> between(), ()=> completed());
+
+      }, dealDelay);  
+    }, flipDelay);
   }  
 
   setGameStatus(status){

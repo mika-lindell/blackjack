@@ -11,9 +11,17 @@
   @extend .wrapper, .text-center;
 
   button{
+
+    position: relative;
     height: $masthead-height;
     margin: 0 1.5rem;
-    @extend .font-regular, .font-size-regular;
+
+    @extend .font-regular, .font-size-regular, .anim-see-me;
+
+    &:disabled{
+      animation: none;
+    }
+
   }
 
 }
@@ -24,3 +32,22 @@
   @extend .font-size-small;
 }
 
+// Animations
+
+@keyframes see-me{
+  0%{
+   text-shadow: 0rem 0rem 0rem rgba(205,190,145,0.5);
+  }
+
+  50%{
+     text-shadow: 0rem 0rem 1rem rgba(205,190,145,1);
+  }
+
+  100%{
+     text-shadow: 0rem 0rem 0rem rgba(205,190,145,0.5);
+  }
+}
+
+.anim-see-me{
+  animation: see-me 1s ease-in-out infinite;
+}

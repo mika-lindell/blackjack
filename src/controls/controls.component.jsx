@@ -26,7 +26,8 @@ class ControlsComponent extends React.Component {
           </button>
           <button 
             onClick={() => this.props.hit()}
-            disabled={this.props.gameStatus === 'new'}
+            disabled={this.props.gameStatus === 'new'
+                      || this.props.gameStatus === 'stand'}
             >
               Hit <span
                 className="shortcut-key"
@@ -36,7 +37,8 @@ class ControlsComponent extends React.Component {
           </button>
           <button 
             onClick={() => this.props.stand()} 
-            disabled={this.props.gameStatus === 'new'}
+            disabled={this.props.gameStatus === 'new'
+                      || this.props.gameStatus === 'stand'}
             >
               Stand <span
                 className="shortcut-key"

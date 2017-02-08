@@ -20,8 +20,6 @@
   width: $card-width;
   height: auto;
 
-  
-
   @include rounded(0.5rem);
   @extend .box-shadow-light; 
 
@@ -40,20 +38,21 @@
   top: 0rem;
 }
 
-.anim-flip{
-  animation: flip 0.3s ease-in-out;
-  animation-iteration-count: 1;
+.card-enter {
+  transition: transform 0.2s ease-in-out;
+  transition-delay: 0.2s;
+  transform: rotateY(-90deg);
 }
 
-@-webkit-keyframes flip{
+.card-enter.card-enter-active {
+  transform: rotateY(0deg);
+}
 
-  0%{
-    transform: rotateY(0deg);
-  }
+.card-leave {
+  transition: transform 0.2s ease-in-out;
+  transform: rotateY(0deg);
+}
 
-  100%{
-    transform: rotateY(90deg);
-  }
-
-
+.card-leave.card-leave-active {
+  transform: rotateY(90deg);
 }
