@@ -136,7 +136,7 @@ class AppComponent extends React.Component {
   }
 
   hit(){
-    if(this.state.gameStatus === 'new') return;
+    if(this.state.gameStatus === 'new' || this.state.gameStatus === 'stand') return;
 
     this.dealer.hit('player');
 
@@ -153,7 +153,7 @@ class AppComponent extends React.Component {
     const flipDelay = 600;
     const dealDelay = 600;
 
-    if(this.state.gameStatus === 'new' && !force) return;
+    if(this.state.gameStatus === 'new' || this.state.gameStatus === 'stand' && !force) return;
 
     this.dealer.stand();
     this.setGameStatus('stand');
@@ -162,12 +162,12 @@ class AppComponent extends React.Component {
     setTimeout(()=>{
 
       this.dealer.flip('dealer');
-      this.setGameStatus('dealer');
+      this.setGameStatus('stand');
 
       setTimeout(()=>{
 
         const between = ()=> {
-          this.setGameStatus('dealer');
+          this.setGameStatus('stand');
         }
 
         const completed = ()=> {
