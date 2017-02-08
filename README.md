@@ -1,8 +1,13 @@
 #A game of BlackJack with React
 
 **Live demo of current build:**
-[http://scribe-panda-48744.bitballoon.com/]
-Modern browsers only
+* [http://scribe-panda-48744.bitballoon.com/]
+* Currently works on latest version of FF & Chrome, not for mobile
+
+TODO:
+* Detection of finer rules in blackjack
+* Betting
+* Polish & then more polish
 
 **To install:**
 ```
