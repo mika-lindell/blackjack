@@ -2,7 +2,7 @@
 
 **Live demo of current build:**
 * [http://scribe-panda-48744.bitballoon.com/]
-* Currently works on latest version of FF & Chrome, not for mobile
+* Currently works on latest version of FF & Chrome, not for mobile nor small resolution displays ATM
 
 TODO:
 * Detection of finer rules in blackjack
