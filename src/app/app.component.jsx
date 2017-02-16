@@ -16,28 +16,17 @@ class AppComponent extends React.Component {
     super();
     
     this.state = {
-      deck: new Deck(),
-      hands: {
-        player: new Hand('player'),
-        dealer: new Hand('dealer')
-      },
       gameStatus: 'new',
       winner: null
     };
-
-    this.dealer = new Dealer();
-    this.preload = new Array();
-
-
   }
 
   componentWillMount(){
 
-    this.dealer.setDeck(this.state.deck);
-    this.preload = this.state.deck.getCardImagePaths();
-    this.dealer.addPlayer(this.state.hands.player);
-    this.dealer.addPlayer(this.state.hands.dealer);
-
+    this.props.dealer.setDeck(this.props.deck);
+    this.props.preload.push.apply( this.props.preload, this.props.deck.getCardImagePaths());
+    this.props.dealer.addPlayer(this.props.hands.player);
+    this.props.dealer.addPlayer(this.props.hands.dealer);
   }
 
   componentDidMount() {
@@ -78,7 +67,7 @@ class AppComponent extends React.Component {
     return (
       <Preload
         loadingIndicator={loadingIndicator}
-        images={this.preload}
+        images={this.props.preload}
         resolveOnError={true}
         mountChildren={true}
         >
@@ -98,12 +87,12 @@ class AppComponent extends React.Component {
               className="table" 
             >
               <HandComponent 
-                hand={this.state.hands.dealer} 
+                hand={this.props.hands.dealer} 
                 winner={this.state.winner}
               />
 
               <HandComponent 
-                hand={this.state.hands.player} 
+                hand={this.props.hands.player} 
                 winner={this.state.winner}
               />
             </div>
@@ -129,19 +118,19 @@ class AppComponent extends React.Component {
     if(this.state.gameStatus !== 'new') return;
 
     this.state.winner = null;
-    this.dealer.deal();
+    this.props.dealer.deal();
     this.setGameStatus('deal');
 
-    if(this.state.hands.player.score == 21) this.stand(true);
+    if(this.props.hands.player.score == 21) this.stand(true);
   }
 
   hit(){
     if(this.state.gameStatus === 'new' || this.state.gameStatus === 'stand') return;
 
-    this.dealer.hit('player');
+    this.props.dealer.hit('player');
 
-    if(this.state.hands.player.score > 21 
-      || this.state.hands.player.score == 21 ){
+    if(this.props.hands.player.score > 21 
+      || this.props.hands.player.score == 21 ){
       this.stand();
     }else{
       this.setGameStatus('hit');
@@ -155,14 +144,14 @@ class AppComponent extends React.Component {
 
     if(this.state.gameStatus === 'new' || this.state.gameStatus === 'stand' && !force) return;
 
-    this.dealer.stand();
+    this.props.dealer.stand();
     this.setGameStatus('stand');
 
     // Need a bit of delay for player to catch what's happening
     setTimeout(()=>{
 
-      this.dealer.flip('dealer');
-      this.state.hands.dealer.calculateScore();
+      this.props.dealer.flip('dealer');
+      this.props.hands.dealer.calculateScore();
       this.setGameStatus('stand');
 
       setTimeout(()=>{
@@ -172,11 +161,11 @@ class AppComponent extends React.Component {
         }
 
         const completed = ()=> {
-          this.state.winner = this.dealer.calculateWinner();  
+          this.state.winner = this.props.dealer.calculateWinner();  
           this.setGameStatus('new');    
         }
 
-        this.dealer.play('dealer', ()=> between(), ()=> completed());
+        this.props.dealer.play('dealer', ()=> between(), ()=> completed());
 
       }, dealDelay);  
     }, flipDelay);
@@ -188,5 +177,15 @@ class AppComponent extends React.Component {
     })
   }
 }
+
+AppComponent.defaultProps = {
+  deck: new Deck(),
+  hands: {
+    player: new Hand('player'),
+    dealer: new Hand('dealer')
+  },
+  dealer: new Dealer(),
+  preload: new Array()
+};
 
 export default AppComponent;
